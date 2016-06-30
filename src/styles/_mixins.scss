@@ -1,0 +1,22 @@
+%clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+%black-box-shadow {
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        top: 0px;
+        pointer-events: none;
+        background: none repeat scroll 0% 0%, transparent linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.8)) repeat scroll 0% 0%;
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+  "ecmaFeatures": {
+    "experimentalObjectRestSpread": true,
+  },
+  "rules": {
+    "react/prefer-stateless-function": 0,
+    "import/no-unresolved": [
+      2, {
+        "ignore": ["style", "^components/"]
+      }
+    ]
+  }
+}
