@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
+import styles from 'styles';
+
 class Header extends Component {
   render() {
     return (
-      <h1>
+      <h1 className={styles.header}>
         {this.props.text}
       </h1>
     );

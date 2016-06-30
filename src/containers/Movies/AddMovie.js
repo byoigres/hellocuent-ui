@@ -1,27 +1,20 @@
 import React, { Component } from 'react';
 
 import Header from 'components/Header';
+import TextBox from 'components/TextBox';
 
 class AddMovie extends Component {
   render() {
     return (
       <div>
         <Header text="Add Movie" />
-        <div>
-          <label>Title</label>
-          <input
-            type="text"
-            placeholder="Title"
-          />
-        </div>
-        <div>
-          <label>Year</label>
-          <input
-            type="text"
-            disabled
-            placeholder="Year"
-          />
-        </div>
+        <TextBox
+          placeholder="Hello from textbox"
+        />
+        <TextBox
+          disabled
+          placeholder="Year"
+        />
         <div>
           <label>{'https://imdb.com/title/'}</label>
         </div>
