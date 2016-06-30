@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com:byoigres/hellocuent-ui.git"
+    "url": "git+ssh://git@gitlab.com:hellocuent/hellocuent-ui.git"
   },
   "keywords": [
     "words"
