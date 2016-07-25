@@ -1,0 +1,29 @@
+.autocomplete {
+  width: 100%;
+  position: relative;
+
+  .autocomplete-result-box {
+    position: absolute;
+    width: 100%;
+    top: 2rem;
+    list-style: none;
+    background-color: $full-white;
+    border: 0.15rem solid $primary-color-1;
+    border-top: none;
+    padding-left: 0rem;
+
+    > li {
+      height: 2rem;
+      padding: 0.35rem 1rem;
+
+      &:hover {
+        color: $full-white;
+        background-color: $primary-color-2;
+      }
+    }
+
+    &.autocomplete-result-box-hide {
+      display: none;
+    }
+  }
+}
