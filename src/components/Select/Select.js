@@ -5,56 +5,25 @@ import styles from 'styles';
 class Select
  extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedItem: null,
-      displayResults: false,
-    };
-    this.onSelectChange = this.onSelectChange.bind(this);
-    this.onItemClick = this.onItemClick.bind(this);
-  }
-
-  onSelectChange(e) {
-    const text = e.target.value;
-
-    this.setState({
-      displayResults: text.length > 0,
-    });
-  }
-
-  onItemClick(e) {
-    const id = e.target.dataset.value;
-    const selectedItem = this.props.items[id];
-
-    this.setState({
-      selectedItem,
-    });
-
-    this.refs.select.value = selectedItem.text;
-    this.close();
+  getValue() {
+    return this.refs.select.value;
   }
 
   render() {
-    const { items, ...props } = this.props;
+    const { items, placeholder, ...props } = this.props;
 
-    let resultBoxStyles = styles['autocomplete-result-box'];
     let itemList = null;
 
-    if (items !== undefined && Object.keys(items).length > 0) {
-      itemList = Object.keys(items).map((item) => (
+    if (items !== undefined && items.length > 0) {
+      itemList = items.map((item) => (
         <option
-          key={items[item].id}
-          data-value={items[item].id}
-          onClick={this.onItemClick}
+          key={item.id}
+          data-value={item.id}
+          value={item.id}
         >
-          {items[item].text}
+          {item.text}
         </option>
       ));
-    }
-
-    if (!this.state.displayResults) {
-      resultBoxStyles = `${resultBoxStyles} ${styles['autocomplete-result-box-hide']}`;
     }
 
     return (
@@ -62,7 +31,6 @@ class Select
         <select
           className={styles['select-element']}
           {...props}
-          onChange={this.onSelectChange}
           ref="select"
           defaultValue=""
         >
@@ -71,7 +39,7 @@ class Select
             disabled
             value=""
           >
-            Title Language
+            {placeholder}
           </option>
           {itemList}
         </select>
@@ -81,7 +49,8 @@ class Select
 }
 
 Select.propTypes = {
-  items: PropTypes.object,
+  placeholder: PropTypes.string,
+  items: PropTypes.array,
 };
 
 export default Select;

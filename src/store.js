@@ -1,7 +1,7 @@
-import { routerReducer as routing } from 'react-router-redux';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import api from './middlewares/api';
+import reducers from './reducers';
 
 const middlewaresCreateStore = compose(
   applyMiddleware(thunk, api),
@@ -9,15 +9,7 @@ const middlewaresCreateStore = compose(
 )(createStore);
 
 const configureStore = (initialState) => middlewaresCreateStore(
-  combineReducers({
-    routing,
-    languages: (state = []) => {
-      console.group('languages reducer');
-      console.log('state', state);
-      console.groupEnd('languages reducer');
-      return state;
-    },
-  }),
+  reducers(initialState),
   initialState
 );
 

@@ -6,7 +6,7 @@ const initialState = fromJS({
 });
 
 function languages(state = initialState, action) {
-
+  console.log('languages reducer', state);
   switch (action.type) {
     /*
     case constants.LANGUAGE_SUCCESS:

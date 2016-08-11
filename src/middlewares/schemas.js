@@ -5,13 +5,7 @@ const movie = new Schema('movies');
 const omdbMovie = new Schema('omdbMovie');
 const translation = new Schema('translations');
 const country = new Schema('countries');
-const language = new Schema('languages');
-
-/*
-movie.define({
-  translations: arrayOf(country),
-});
-*/
+const language = new Schema('languages', { idAttribute: 'code' });
 
 translation.define({
   movie: {},

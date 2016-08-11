@@ -39,12 +39,18 @@ function callApi(requestInfo = {
   return fetch(fullUrl, options).then(response =>
       response.json().then(json => ({ json, response }))
     ).then(({ json, response }) => {
+      // console.log('json', json);
       if (!response.ok) {
+        // console.log('rejecting', json);
         return Promise.reject(json);
       }
 
       if (schema) {
+        // console.group('API');
+        // console.log('json', json);
         const normalized = normalize(json, schema);
+        // console.log('normalized', normalized);
+        // console.groupEnd('API');
         return Object.assign({}, normalized);
       }
 
@@ -87,9 +93,9 @@ export default () => next => action => {
       response,
       type: successType,
     })),
-    error => next(actionWith({
+    response => next(actionWith({
       type: failureType,
-      error: error.message || 'Something bad happened',
+      error: response.error || 'Something bad happened',
     }))
   );
 };

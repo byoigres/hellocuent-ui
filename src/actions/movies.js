@@ -1,6 +1,6 @@
-import { CALL_API } from '../../middlewares/api';
-import { Schemas } from '../../middlewares/schemas';
-import * as constants from './constants';
+import { CALL_API } from '../middlewares/api';
+import { Schemas } from '../middlewares/schemas';
+import * as constants from '../constants';
 
 export function searchOmdbMovie(criteria) {
   return {
@@ -20,7 +20,7 @@ export function searchOmdbMovie(criteria) {
   };
 }
 
-export function addMovie(title, year, imdbId) {
+export function addMovie(title, year, imdbId, languageCode) {
   return {
     [CALL_API]: {
       types: [
@@ -34,6 +34,7 @@ export function addMovie(title, year, imdbId) {
         title,
         year,
         imdbId,
+        languageCode,
       },
       schema: Schemas.MOVIE,
     },

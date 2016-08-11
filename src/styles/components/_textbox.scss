@@ -1,27 +1,39 @@
 .textbox {
-  display: flex;
-  flex-direction: row;
+  .textbox-container {
+    display: flex;
+    flex-direction: row;
 
-  .textbox-input {
-    flex: 1;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    border: none;
-    border-bottom-style: solid;
-    border-bottom-width: 0.15rem;
-    border-bottom-color: $primary-color-1;
-    outline: none;
+    .textbox-input {
+      flex: 1;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-bottom-style: solid;
+      border-bottom-width: 0.15rem;
+      border-bottom-color: $primary-color-1;
+      outline: none;
+
+      &.textbox-input-error {
+        color: $error-color;
+        border-bottom-color: $error-color;
+      }
+    }
+
+    .textbox-input-with-left-content {
+      padding-left: 0;
+    }
+
+    .left-textbox-content {
+      padding: 0.5rem 0 0 0.5rem;
+      margin: 0.5rem 0;
+      border-bottom-style: solid;
+      border-bottom-width: 0.15rem;
+      border-bottom-color: $primary-color-1;
+    }
   }
 
-  .textbox-input-with-left-content {
-    padding-left: 0;
-  }
-
-  .left-textbox-content {
-    padding: 0.5rem 0;
-    margin: 0.5rem 0;
-    border-bottom-style: solid;
-    border-bottom-width: 0.15rem;
-    border-bottom-color: $primary-color-1;
+  .textbox-error {
+    font-size: 0.8rem;
+    color: $error-color;
   }
 }

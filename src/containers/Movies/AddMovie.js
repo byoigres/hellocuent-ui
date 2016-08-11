@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { searchOmdbMovie, addMovie, getLanguages } from './actions';
+import { searchOmdbMovie, addMovie, getLanguages } from '../../actions';
 
 import Header from 'components/Header';
 import TextBox from 'components/TextBox';
-// import Autocomplete from 'components/Autocomplete';
 import Select from 'components/Select';
 import Button from 'components/Button';
 
@@ -18,6 +17,10 @@ class AddMovie extends Component {
     this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
   }
 
+  componentWillMount() {
+    this.props.getLanguages();
+  }
+
   handleMovieChange(e) {
     const criteria = e.target.value;
 
@@ -28,41 +31,42 @@ class AddMovie extends Component {
     this.props.addMovie(
       this.refs.title.getValue(),
       this.refs.year.getValue(),
-      this.refs.imdbId.getValue()
+      this.refs.imdbId.getValue(),
+      this.refs.language.getValue()
     );
   }
 
-  componentWillMount() {
-    this.props.getLanguages();
-  }
-
   render() {
-    const items = {
-      1: { id: 1, text: 'English' },
-      2: { id: 2, text: 'Spanish' },
-    };
+    const { messages } = this.props;
+    const colStyle =
+      `${flexboxgrid['col-sm-12']} ${flexboxgrid['col-md-12']} ${flexboxgrid['col-lg-12']}`;
 
     return (
       <div className={flexboxgrid.row}>
-        <div className={flexboxgrid['col-md-12']}>
+        <div className={colStyle}>
           <Header text="Add Movie" />
           <TextBox
             placeholder="Original title"
             ref="title"
+            error={messages.title}
           />
           <TextBox
             maxLength="4"
             placeholder="Year"
             ref="year"
+            error={messages.year}
           />
           <TextBox
             leftText="https://imdb.com/title/"
             placeholder="Imdb ID"
             ref="imdbId"
+            error={messages.imdbId}
           />
           <Select
             placeholder="Title language"
-            items={items}
+            items={this.props.languages}
+            ref="language"
+            error={messages.languageCode}
           />
           <Button
             text="Add"
@@ -77,14 +81,36 @@ class AddMovie extends Component {
 AddMovie.displayName = 'AddMovie';
 
 AddMovie.propTypes = {
+  languages: PropTypes.array.isRequired,
+  messages: PropTypes.object,
   searchOmdbMovie: PropTypes.func.isRequired,
   addMovie: PropTypes.func.isRequired,
   getLanguages: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
-  console.log('state', state);
-  return state;
+  const {
+    errors: {
+      message,
+      messages,
+    },
+    entities: {
+      languages: languageList,
+    },
+  } = state;
+
+  let languages = [];
+
+  languages = Object.keys(languageList).map((item) => ({
+    id: languageList[item].code,
+    text: languageList[item].name,
+  }));
+
+  return {
+    languages,
+    message,
+    messages,
+  };
 }
 
 export default connect(mapStateToProps, {
