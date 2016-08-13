@@ -1,23 +1,30 @@
-.select-container {
-  display: flex;
-  flex-direction: row;
+.select {
+  .select-container {
+    display: flex;
+    flex-direction: row;
 
-  .select-element {
-    flex: 1;
-    background-color: $full-white;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    border: none;
-    border-bottom-style: solid;
-    border-bottom-width: 0.15rem;
-    border-bottom-color: $primary-color-1;
-    outline: none;
+    .select-element {
+      flex: 1;
+      background-color: $full-white;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-bottom-style: solid;
+      border-bottom-width: 0.15rem;
+      border-bottom-color: $primary-color-1;
+      outline: none;
 
-    .select-item-placeholder {
-      color: $light-black;
+      .select-item-placeholder {
+        color: $light-black;
+      }
+      .select-item {
+
+      }
     }
-    .select-item {
+  }
 
-    }
+  .select-error {
+    font-size: 0.8rem;
+    color: $error-color;
   }
 }
