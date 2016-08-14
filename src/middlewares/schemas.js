@@ -16,6 +16,7 @@ language.define();
 
 export const Schemas = {
   MOVIE: movie,
+  MOVIES: arrayOf(movie),
   USER: user,
   COUNTRY: country,
   LANGUAGE: language,

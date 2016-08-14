@@ -2,6 +2,7 @@ import merge from 'lodash/fp/merge';
 
 const initialState = {
   languages: {},
+  movies: {},
 };
 
 function mergeEntities(state, entities) {
