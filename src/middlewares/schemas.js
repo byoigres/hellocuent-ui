@@ -4,15 +4,17 @@ const user = new Schema('users');
 const movie = new Schema('movies');
 const omdbMovie = new Schema('omdbMovie');
 const translation = new Schema('translations');
-const country = new Schema('countries');
+const country = new Schema('countries', { idAttribute: 'code' });
 const language = new Schema('languages', { idAttribute: 'code' });
 
-translation.define({
-  movie: {},
-  country: {},
+movie.define({
+  language,
+  translations: arrayOf(translation),
 });
 
-language.define();
+translation.define({
+  country,
+});
 
 export const Schemas = {
   MOVIE: movie,

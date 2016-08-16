@@ -11,6 +11,7 @@ class MainLayout extends Component {
       <div className={`${styles['main-layout']} ${flexboxgrid.container}`}>
         <Navbar
           title="Hellocuent"
+          link="/movies"
         />
         {this.props.children}
       </div>

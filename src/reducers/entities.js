@@ -3,6 +3,8 @@ import merge from 'lodash/fp/merge';
 const initialState = {
   languages: {},
   movies: {},
+  translations: {},
+  countries: {},
 };
 
 function mergeEntities(state, entities) {

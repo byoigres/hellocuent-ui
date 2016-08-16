@@ -17,6 +17,22 @@ export function getMovies() {
   };
 }
 
+export function getMovie(id) {
+  return {
+    [CALL_API]: {
+      types: [
+        constants.GET_MOVIE_REQUEST,
+        constants.GET_MOVIE_SUCCESS,
+        constants.GET_MOVIE_FAILURE,
+      ],
+      endpoint: `api/movies/${id}`,
+      method: 'GET',
+      schema: Schemas.MOVIE,
+    },
+  };
+}
+
+
 export function searchOmdbMovie(criteria) {
   return {
     [CALL_API]: {

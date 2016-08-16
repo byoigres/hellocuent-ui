@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { getMovies } from '../../actions';
 
 class ListMovies extends Component {
@@ -14,7 +15,7 @@ class ListMovies extends Component {
         <h2>List Movies</h2>
         {this.props.movies.map((movie) => (
           <div key={movie.id}>
-            <a href={`/movies/${movie.id}`}>{movie.title}</a>
+            <Link to={`/movies/${movie.id}`}>{`${movie.title} (${movie.year})`}</Link>
           </div>
         ))}
       </div>
