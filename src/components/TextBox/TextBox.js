@@ -9,7 +9,6 @@ class TextBox extends Component {
 
   render() {
     const { text, leftText, error, ...props } = this.props;
-    console.log('error', error);
     let textboxStyles = styles['textbox-input'];
     let leftContainer = null;
     let errorContainer = null;

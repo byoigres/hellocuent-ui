@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getMovie } from '../../actions';
+import { Link } from 'react-router';
 
 class MovieDetails extends Component {
 
@@ -28,6 +29,7 @@ class MovieDetails extends Component {
   }
 
   renderTranslations() {
+    const { movieId } = this.props.routeParams;
     const { translations, countries } = this.props;
 
     if (translations) {
@@ -38,6 +40,7 @@ class MovieDetails extends Component {
               <div>{`${item.title} (${countries[item.country].name})`}</div>
             </div>
           ))}
+          <Link to={`/movies/${movieId}/translation/add`}>Add translation</Link>
         </div>
       );
     }

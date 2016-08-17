@@ -26,7 +26,7 @@ class Select
         </option>
       ));
     }
-    console.log('error', error);
+
     if (error) {
       errorContainer = (
         <div className={styles['select-error']}>{error}</div>
