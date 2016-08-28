@@ -26,7 +26,8 @@ MainLayout.propTypes = {
 };
 
 MainLayout.contextTypes = {
-  store: PropTypes.object,
+  store: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };
 
 export default MainLayout;

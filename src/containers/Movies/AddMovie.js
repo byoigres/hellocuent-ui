@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { searchOmdbMovie, addMovie, getLanguages } from '../../actions';
+import { addMovie, getLanguages, resetErrors } from '../../actions';
 
 import Header from 'components/Header';
 import TextBox from 'components/TextBox';
@@ -13,18 +13,12 @@ class AddMovie extends Component {
 
   constructor(props) {
     super(props);
-    this.handleMovieChange = this.handleMovieChange.bind(this);
     this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
   }
 
   componentWillMount() {
+    this.props.resetErrors();
     this.props.getLanguages();
-  }
-
-  handleMovieChange(e) {
-    const criteria = e.target.value;
-
-    this.props.searchOmdbMovie(criteria);
   }
 
   handleAddButtonClick() {
@@ -83,9 +77,9 @@ AddMovie.displayName = 'AddMovie';
 AddMovie.propTypes = {
   languages: PropTypes.array.isRequired,
   messages: PropTypes.object,
-  searchOmdbMovie: PropTypes.func.isRequired,
   addMovie: PropTypes.func.isRequired,
   getLanguages: PropTypes.func.isRequired,
+  resetErrors: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -114,7 +108,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  searchOmdbMovie,
   addMovie,
   getLanguages,
+  resetErrors,
 })(AddMovie);

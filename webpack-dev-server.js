@@ -79,7 +79,7 @@ server.register([
       })
     ),
   });
-  */
+  //*/
   server.start(() => console.log(`Server running on ${server.info.uri}`));
 
   return 0;

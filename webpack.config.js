@@ -2,6 +2,7 @@ var Webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var Clean = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var DashboardPlugin = require('webpack-dashboard/plugin');
 var path = require('path');
 
 var BASE_PATH = __dirname;
@@ -56,6 +57,7 @@ var webpackConfig = {
   },
 
   plugins: [
+    new DashboardPlugin(),
     new Webpack.optimize.OccurenceOrderPlugin(),
     new Webpack.HotModuleReplacementPlugin(),
     new Webpack.NoErrorsPlugin(),
@@ -98,23 +100,21 @@ var webpackConfig = {
         target: PROXY_TARGET,
         secure: false,
       },
-      '/public/static/*': {
+      '/static/*': {
         target: PROXY_TARGET,
         secure: false,
         bypass: function(req, res, proxyOptions) {
-
           if (/^\/public\/static\/[A-Za-z0-9\-]+\.css/.test(req.url)) {
             res.writeHead(200, { 'Content-Type': 'text/css' });
             res.write('// This is a fake CSS content... :)');
             res.end();
-            return;
-          }
-
-          if (req.headers.accept.indexOf('html') !== -1) {
-            console.log('Skipping proxy for browser request.');
-            return '/index.html';
+            return true;
           }
         },
+      },
+      '/images/*': {
+        target: PROXY_TARGET,
+        secure: false
       },
     }
   }

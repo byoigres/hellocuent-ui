@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getMovie } from '../../actions';
-import { Link } from 'react-router';
+import Button from 'components/Button';
+import flexboxgrid from 'flexboxgrid';
 
 class MovieDetails extends Component {
 
@@ -12,15 +13,32 @@ class MovieDetails extends Component {
 
   renderMovie() {
     if (this.props.movie) {
-      const { movie } = this.props;
+      const { movie, language } = this.props;
       const movieHeader = `${movie.title} (${movie.year})`;
       const imdbUrl = `http://imdb.com/title/${movie.imdbId}`;
 
       return (
-        <div>
-          <h2>{movieHeader}</h2>
-          <a href={imdbUrl} target="_blank">{imdbUrl}</a>
-          <div>Original language: {movie.language}</div>
+        <div className={flexboxgrid['col-md-12']}>
+          <div className={flexboxgrid.row}>
+            <div className={flexboxgrid['col-md-12']}>
+              <h2>{movieHeader}</h2>
+            </div>
+          </div>
+          <div className={flexboxgrid.row}>
+            <div className={flexboxgrid['col-md-6']}>
+              <a href={imdbUrl} target="_blank">{imdbUrl}</a>
+              <div>Original language: {language.name}</div>
+            </div>
+            <div className={flexboxgrid['col-md-6']}>
+              <img
+                style={{
+                  width: '20rem',
+                }}
+                alt={movieHeader}
+                src="/images/1.jpg"
+              />
+            </div>
+          </div>
         </div>
       );
     }
@@ -32,28 +50,32 @@ class MovieDetails extends Component {
     const { movieId } = this.props.routeParams;
     const { translations, countries } = this.props;
 
-    if (translations) {
-      return (
-        <div>
-          {translations.map((item) => (
-            <div key={item.id}>
-              <div>{`${item.title} (${countries[item.country].name})`}</div>
-            </div>
-          ))}
-          <Link to={`/movies/${movieId}/translation/add`}>Add translation</Link>
-        </div>
-      );
-    }
-
-    return <div>No translations</div>;
+    return (
+      <div className={flexboxgrid['col-md-12']}>
+        <h2>Translations</h2>
+        {translations.map((item) => (
+          <div key={item.id}>
+            <div>{`${item.title} (${countries[item.country].name})`}</div>
+          </div>
+        ))}
+        <Button
+          text="Add translation"
+          link={`/movies/${movieId}/translation/add`}
+          onClick={this.handleAddTranslationClick}
+        />
+      </div>
+    );
   }
 
   render() {
     return (
-      <div>
-        {this.renderMovie()}
-        <h2>Translations</h2>
-        {this.renderTranslations()}
+      <div className={flexboxgrid.row}>
+        <div className={flexboxgrid['col-md-12']}>
+          {this.renderMovie()}
+        </div>
+        <div className={flexboxgrid['col-md-12']}>
+          {this.renderTranslations()}
+        </div>
       </div>
     );
   }
@@ -94,7 +116,7 @@ function mapStateToProps(state, props) {
 
   const movie = movies[movieId] || { translations: [] };
 
-  const language = languages[movie.language || null];
+  const language = (languages[movie.language || null]) || { code: '', name: '' };
   const translationList = movie.translations || [];
   const movieTranslations = translationList.map((item) => translations[item]);
 

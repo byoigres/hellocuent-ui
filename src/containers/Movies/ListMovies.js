@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { getMovies } from '../../actions';
+import Button from 'components/Button';
 
 class ListMovies extends Component {
 
@@ -18,6 +19,10 @@ class ListMovies extends Component {
             <Link to={`/movies/${movie.id}`}>{`${movie.title} (${movie.year})`}</Link>
           </div>
         ))}
+        <Button
+          text="Add Movie"
+          link="/movies/add"
+        />
       </div>
     );
   }
