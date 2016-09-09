@@ -51,7 +51,8 @@ var webpackConfig = {
       },
       {
         test: /\.(css|scss)$/,
-        loaders: ['style', 'css?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'sass']
+        //loaders: ['style', 'css?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'sass']
+        loaders: ['style', 'css?sourceMap&modules&localIdentName=[local]', 'sass']
       }
     ]
   },

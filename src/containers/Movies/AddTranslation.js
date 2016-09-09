@@ -1,6 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getMovie, getCountries, addTranslation, resetErrors } from '../../actions';
+import {
+  getMovie,
+  getCountries,
+  getLanguagesByCountry,
+  addTranslation,
+  resetErrors } from '../../actions';
 
 import { Link } from 'react-router';
 
@@ -16,6 +21,7 @@ class AddTranslation extends Component {
   constructor(props) {
     super(props);
     this.handleAddTranslationClick = this.handleAddTranslationClick.bind(this);
+    this.handleCountryChange = this.handleCountryChange.bind(this);
   }
 
   componentWillMount() {
@@ -33,6 +39,10 @@ class AddTranslation extends Component {
     }
 
     return true;
+  }
+
+  handleCountryChange(e) {
+    this.props.getLanguagesByCountry(e.target.value);
   }
 
   handleAddTranslationClick(e) {
@@ -65,8 +75,15 @@ class AddTranslation extends Component {
           <Select
             placeholder="Country"
             items={countries}
+            onChange={this.handleCountryChange}
             ref="country"
             error={messages.country}
+          />
+          <Select
+            placeholder="Language"
+            ref="language"
+            disabled={(this.refs.country && this.refs.country.getValue().length === 0)}
+            error={messages.language}
           />
           <Button
             text="Add translation"
@@ -82,11 +99,16 @@ AddTranslation.displayName = 'AddTranslation';
 
 AddTranslation.propTypes = {
   title: PropTypes.string.isRequired,
-  countries: PropTypes.array,
+  countries: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    text: PropTypes.string,
+    languages: PropTypes.array,
+  })),
   messages: PropTypes.object,
   redirect: PropTypes.string,
   getMovie: PropTypes.func.isRequired,
   getCountries: PropTypes.func.isRequired,
+  getLanguagesByCountry: PropTypes.func.isRequired,
   addTranslation: PropTypes.func.isRequired,
   routeParams: PropTypes.object.isRequired,
   resetErrors: PropTypes.func.isRequired,
@@ -124,6 +146,7 @@ function mapStateToProps(state, props) {
   const countryList = Object.keys(countries).map(item => ({
     id: countries[item].code,
     text: countries[item].name,
+    languages: countries[item].languages,
   }));
 
   return {
@@ -138,6 +161,7 @@ function mapStateToProps(state, props) {
 export default connect(mapStateToProps, {
   getMovie,
   getCountries,
+  getLanguagesByCountry,
   addTranslation,
   resetErrors,
 })(AddTranslation);

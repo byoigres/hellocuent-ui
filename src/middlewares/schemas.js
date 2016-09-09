@@ -14,6 +14,11 @@ movie.define({
 
 translation.define({
   country,
+  language,
+});
+
+country.define({
+  languages: arrayOf(language),
 });
 
 export const Schemas = {

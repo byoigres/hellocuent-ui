@@ -13,7 +13,12 @@ class MainLayout extends Component {
           title="Hellocuent"
           link="/movies"
         />
-        {this.props.children}
+        <div className={`${flexboxgrid.row} ${flexboxgrid['center-xs']}`}>
+          <div className={`${flexboxgrid['col-md-10']} ${styles['white-bg']}`}>
+            {this.props.children}
+          </div>
+        </div>
+
       </div>
     );
   }

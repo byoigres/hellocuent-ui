@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { getMovies } from '../../actions';
+
 import Button from 'components/Button';
+import Card from 'components/Card';
 
 class ListMovies extends Component {
 
@@ -15,9 +17,9 @@ class ListMovies extends Component {
       <div>
         <h2>List Movies</h2>
         {this.props.movies.map((movie) => (
-          <div key={movie.id}>
+          <Card key={movie.id}>
             <Link to={`/movies/${movie.id}`}>{`${movie.title} (${movie.year})`}</Link>
-          </div>
+          </Card>
         ))}
         <Button
           text="Add Movie"
