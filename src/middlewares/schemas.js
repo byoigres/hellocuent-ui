@@ -25,6 +25,7 @@ export const Schemas = {
   MOVIE: movie,
   MOVIES: arrayOf(movie),
   USER: user,
+  USERS: arrayOf(user),
   COUNTRY: country,
   COUNTRIES: arrayOf(country),
   LANGUAGE: language,

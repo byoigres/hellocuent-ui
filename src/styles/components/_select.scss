@@ -17,8 +17,15 @@
       .select-item-placeholder {
         color: $light-black;
       }
+
       .select-item {
 
+      }
+
+      &:disabled {
+        background-color: $grey-300;
+        color: $grey-500;
+        border-bottom-color: $grey-800;
       }
     }
   }

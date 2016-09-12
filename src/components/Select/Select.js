@@ -15,7 +15,7 @@ class Select
     let itemList = null;
     let errorContainer = null;
 
-    if (items !== undefined && items.length > 0) {
+    if (items && items.length > 0) {
       itemList = items.map((item) => (
         <option
           key={item.id}

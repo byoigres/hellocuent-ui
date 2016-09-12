@@ -52,15 +52,31 @@ class AddTranslation extends Component {
     this.props.addTranslation(
       movieId,
       this.refs.title.getValue(),
-      this.refs.country.getValue()
+      this.refs.country.getValue(),
+      this.refs.language.getValue(),
+      this.refs.description.getValue()
     );
   }
 
   render() {
-    const { title, countries, messages } = this.props;
+    const { title, countries, languages, messages } = this.props;
     const { movieId } = this.props.routeParams;
     const colStyle =
       `${flexboxgrid['col-sm-12']} ${flexboxgrid['col-md-12']} ${flexboxgrid['col-lg-12']}`;
+
+    const countryList = Object.keys(countries).map(item => ({
+      id: countries[item].code,
+      text: countries[item].name,
+    }));
+
+    let languageList = [];
+
+    if (this.refs.country && this.refs.country.getValue().length > 0) {
+      languageList = countries[this.refs.country.getValue()].languages.map((item) => ({
+        id: languages[item].code,
+        text: languages[item].name,
+      }));
+    }
 
     return (
       <div className={flexboxgrid.row}>
@@ -74,16 +90,22 @@ class AddTranslation extends Component {
           />
           <Select
             placeholder="Country"
-            items={countries}
+            items={countryList}
             onChange={this.handleCountryChange}
             ref="country"
             error={messages.country}
           />
           <Select
             placeholder="Language"
+            items={languageList}
             ref="language"
             disabled={(this.refs.country && this.refs.country.getValue().length === 0)}
             error={messages.language}
+          />
+          <TextBox
+            placeholder="Description"
+            ref="description"
+            error={messages.description}
           />
           <Button
             text="Add translation"
@@ -99,11 +121,14 @@ AddTranslation.displayName = 'AddTranslation';
 
 AddTranslation.propTypes = {
   title: PropTypes.string.isRequired,
-  countries: PropTypes.arrayOf(PropTypes.shape({
+  countries: PropTypes.shape({
     id: PropTypes.string,
     text: PropTypes.string,
-    languages: PropTypes.array,
-  })),
+  }),
+  languages: PropTypes.shape({
+    id: PropTypes.string,
+    text: PropTypes.string,
+  }),
   messages: PropTypes.object,
   redirect: PropTypes.string,
   getMovie: PropTypes.func.isRequired,
@@ -133,6 +158,7 @@ function mapStateToProps(state, props) {
     entities: {
       movies,
       countries,
+      languages,
     },
   } = state;
 
@@ -142,16 +168,17 @@ function mapStateToProps(state, props) {
   if (registered) {
     redirect = `/movies/${movieId}`;
   }
-
+  /*
   const countryList = Object.keys(countries).map(item => ({
     id: countries[item].code,
     text: countries[item].name,
-    languages: countries[item].languages,
   }));
+  */
 
   return {
     title: movie.title,
-    countries: countryList,
+    countries, // : countryList,
+    languages,
     message,
     messages,
     redirect,

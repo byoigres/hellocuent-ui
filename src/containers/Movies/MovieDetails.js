@@ -61,8 +61,9 @@ class MovieDetails extends Component {
             <thead>
               <tr>
                 <th>Country</th>
+                <th>English</th>
                 <th>Language</th>
-                <th>Title</th>
+                <th>Original Title</th>
                 <th>Description</th>
               </tr>
             </thead>
@@ -70,6 +71,7 @@ class MovieDetails extends Component {
               {translations.map((item) => (
                 <tr key={item.id}>
                   <td>{countries[item.country].name}</td>
+                  <td>Suicide Squadron</td>
                   <td>{languages[item.language].name}</td>
                   <td>{item.title}</td>
                   <td>{item.description}</td>

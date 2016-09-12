@@ -2,7 +2,12 @@ import { CALL_API } from '../middlewares/api';
 // import { Schemas } from '../middlewares/schemas';
 import * as constants from '../constants';
 
-export function addTranslation(movieId, title, countryCode) {
+export function addTranslation(
+  movieId,
+  title,
+  countryCode,
+  languageCode,
+  description) {
   return {
     [CALL_API]: {
       types: [
@@ -16,6 +21,8 @@ export function addTranslation(movieId, title, countryCode) {
         movieId,
         title,
         countryCode,
+        languageCode,
+        description,
       },
     },
   };
