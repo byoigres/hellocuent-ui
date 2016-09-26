@@ -1,18 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 
-import flexboxgrid from 'flexboxgrid';
 import styles from 'styles';
 
 class MainLayout extends Component {
   render() {
     return (
-      <div className={`${styles['clean-layout']} ${flexboxgrid.container}`}>
-        <div className={`${flexboxgrid.row} ${flexboxgrid['center-xs']}`}>
-          <div className={flexboxgrid['col-md-12']}>
-            {this.props.children}
-          </div>
-        </div>
-
+      <div className={styles['clean-layout']}>
+        {this.props.children}
       </div>
     );
   }

@@ -36,7 +36,7 @@ class AddMovie extends Component {
       `${flexboxgrid['col-sm-12']} ${flexboxgrid['col-md-12']} ${flexboxgrid['col-lg-12']}`;
 
     return (
-      <div className={flexboxgrid.row}>
+      <div className={`${flexboxgrid.row} ${flexboxgrid['start-xs']}`}>
         <div className={colStyle}>
           <Header text="Add Movie" />
           <TextBox

@@ -2,21 +2,18 @@ import React, { Component, PropTypes } from 'react';
 
 import Navbar from '../Navbar';
 
-import flexboxgrid from 'flexboxgrid';
 import styles from 'styles';
 
 class MainLayout extends Component {
   render() {
     return (
-      <div className={`${styles['main-layout']} ${flexboxgrid.container}`}>
+      <div className={styles['main-layout']}>
         <Navbar
           title="Hellocuent"
           link="/movies"
         />
-        <div className={`${flexboxgrid.row} ${flexboxgrid['center-xs']}`}>
-          <div className={`${flexboxgrid['col-md-10']} ${styles['white-bg']}`}>
+        <div className={styles['main-layout-container']}>
             {this.props.children}
-          </div>
         </div>
 
       </div>

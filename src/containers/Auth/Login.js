@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { login, resetErrors } from '../../actions';
 
-import flexboxgrid from 'flexboxgrid';
 import Button from 'components/Button';
 import TextBox from 'components/TextBox';
+import styles from 'styles';
 
 class Login extends Component {
 
@@ -27,18 +27,22 @@ class Login extends Component {
   }
 
   render() {
+    const { messages } = this.props;
+
     return (
-      <div className={`${flexboxgrid.row} ${flexboxgrid['center-xs']}`}>
-        <div className={flexboxgrid['col-md-4']}>
+      <div className={styles['login-container']}>
+        <div className={styles['login-box']}>
           <h2>Login</h2>
           <h3>{this.props.message}</h3>
           <TextBox
             placeholder="Email"
+            error={messages.username}
             ref="username"
           />
           <TextBox
             placeholder="Password"
             type="password"
+            error={messages.password}
             ref="password"
           />
           <Button
@@ -54,6 +58,7 @@ class Login extends Component {
 Login.displayName = 'Login';
 
 Login.propTypes = {
+  messages: PropTypes.object,
   message: PropTypes.string,
   login: PropTypes.func.isRequired,
   resetErrors: PropTypes.func.isRequired,
@@ -64,11 +69,13 @@ function mapStateToProps(state) {
   const {
     errors: {
       message,
+      messages,
     },
   } = state;
 
   return {
     message,
+    messages,
   };
 }
 

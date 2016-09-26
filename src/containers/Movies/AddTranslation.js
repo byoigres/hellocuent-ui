@@ -79,7 +79,7 @@ class AddTranslation extends Component {
     }
 
     return (
-      <div className={flexboxgrid.row}>
+      <div className={`${flexboxgrid.row} ${flexboxgrid['start-xs']}`}>
         <div className={colStyle}>
           <Header text="Add Translation" />
           <Link to={`/movies/${movieId}`}>{title}</Link>

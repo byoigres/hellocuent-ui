@@ -97,7 +97,7 @@ var webpackConfig = {
       version: false
     },
     proxy: {
-      '/api*': {
+      '/api/*': {
         target: PROXY_TARGET,
         secure: false,
       },
