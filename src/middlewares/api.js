@@ -1,15 +1,13 @@
 import 'isomorphic-fetch';
 import { normalize } from 'normalizr';
-import { camelizeKeys } from 'humps';
+// import { camelizeKeys } from 'humps';
 
 export const CALL_API = Symbol('Call API');
 
 function callApi(requestInfo = {
   method: 'GET',
   body: null,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  headers: {},
 }, schema) {
   const { endpoint, method, body, headers } = requestInfo;
   const fullUrl = ` /${endpoint}`;
@@ -24,11 +22,11 @@ function callApi(requestInfo = {
     if (method === 'POST') {
       const data = new FormData();
 
-      for (const key in body) {
-        if (body.hasOwnProperty(key)) {
+      Object.keys(body).forEach((key) => {
+        if (!data.has(key)) {
           data.append(key, body[key]);
         }
-      }
+      });
 
       options.body = data;
     } else {
@@ -39,7 +37,10 @@ function callApi(requestInfo = {
   return fetch(fullUrl, options).then(response =>
       response.json().then(json => ({ json, response }))
     ).then(({ json, response }) => {
-      // console.log('json', json);
+      if (response.headers.has('authorization')) {
+        // console.log('Headers', response.headers.get('authorization'));
+      }
+
       if (!response.ok) {
         // console.log('rejecting', json);
         return Promise.reject(json);

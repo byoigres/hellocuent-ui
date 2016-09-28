@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { login, resetErrors } from '../../actions';
 
+import { Link, browserHistory } from 'react-router';
 import Button from 'components/Button';
 import TextBox from 'components/TextBox';
 import styles from 'styles';
@@ -14,7 +15,19 @@ class Login extends Component {
   }
 
   componentWillMount() {
+    if (this.props.isLogged) {
+      browserHistory.push('/');
+    }
+
     this.props.resetErrors();
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.isLogged) {
+      browserHistory.push('/');
+    }
+
+    return false;
   }
 
   handlerLoginClick(e) {
@@ -47,8 +60,10 @@ class Login extends Component {
           />
           <Button
             text="Login"
+            block
             onClick={this.handlerLoginClick}
           />
+          <Link to="/auth/register">Create an account</Link>
         </div>
       </div>
     );
@@ -58,24 +73,32 @@ class Login extends Component {
 Login.displayName = 'Login';
 
 Login.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
   messages: PropTypes.object,
   message: PropTypes.string,
   login: PropTypes.func.isRequired,
   resetErrors: PropTypes.func.isRequired,
 };
 
+Login.defaultProps = {
+  isLogged: false,
+};
+
 function mapStateToProps(state) {
-  // console.log(state);
   const {
     errors: {
       message,
       messages,
+    },
+    authentication: {
+      token,
     },
   } = state;
 
   return {
     message,
     messages,
+    isLogged: (token && typeof token === 'string' && token.length > 0),
   };
 }
 

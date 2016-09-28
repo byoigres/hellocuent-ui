@@ -5,6 +5,7 @@ import entities from './entities';
 import errors from './errors';
 import loaders from './loaders';
 import translations from './translations';
+import authentication from './authentication';
 
 export default function reducers() {
   return combineReducers({
@@ -13,5 +14,6 @@ export default function reducers() {
     errors,
     loaders,
     translations,
+    authentication,
   });
 }

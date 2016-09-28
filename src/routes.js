@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import MainLayout from './components/Layouts/MainLayout';
 import CleanLayout from './components/Layouts/CleanLayout';
-import Home from './containers/Home';
+// import Home from './containers/Home';
 
 import Login from './containers/Auth/Login';
 import AddMovie from './containers/Movies/AddMovie';
@@ -14,7 +14,7 @@ import AddTranslation from './containers/Movies/AddTranslation';
 export default (
   <div>
     <Route path="/" component={MainLayout}>
-      <IndexRoute component={Home} />
+      <IndexRoute component={ListMovies} />
       <Route path="movies">
         <IndexRoute component={ListMovies} />
         <Route path="add" component={AddMovie} />

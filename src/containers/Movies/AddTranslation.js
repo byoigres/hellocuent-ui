@@ -168,16 +168,10 @@ function mapStateToProps(state, props) {
   if (registered) {
     redirect = `/movies/${movieId}`;
   }
-  /*
-  const countryList = Object.keys(countries).map(item => ({
-    id: countries[item].code,
-    text: countries[item].name,
-  }));
-  */
 
   return {
     title: movie.title,
-    countries, // : countryList,
+    countries,
     languages,
     message,
     messages,

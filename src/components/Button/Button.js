@@ -5,11 +5,16 @@ import styles from 'styles';
 
 class Button extends Component {
   render() {
-    const { text, link, ...props } = this.props;
+    const { text, link, block, ...props } = this.props;
+    let buttonStyles = styles.button;
+
+    if (block) {
+      buttonStyles = `${buttonStyles} ${styles['button-block']}`;
+    }
 
     let component = (
       <button
-        className={styles.button}
+        className={buttonStyles}
         {...props}
       >
         {text}
@@ -20,7 +25,7 @@ class Button extends Component {
       component = (
         <Link
           to={link}
-          className={styles.button}
+          className={buttonStyles}
           {...props}
         >
           {text}
@@ -34,6 +39,7 @@ class Button extends Component {
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
+  block: PropTypes.bool,
   link: PropTypes.string,
 };
 

@@ -9,7 +9,21 @@ import configureStore from './store';
 import routes from './routes';
 import App from './containers/App';
 
-const store = configureStore({});
+const loadauthenticationData = () => {
+  if (localStorage.getItem('token') !== null &&
+      localStorage.getItem('user')) {
+    return {
+      authentication: {
+        token: localStorage.getItem('token'),
+        user: JSON.parse(localStorage.getItem('user')),
+      },
+    };
+  }
+
+  return {};
+};
+
+const store = configureStore(loadauthenticationData());
 
 const syncedHistory = syncHistoryWithStore(browserHistory, store);
 const rootElement = document.getElementById('app');
