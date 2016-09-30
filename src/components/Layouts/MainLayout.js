@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import Navbar from '../Navbar';
 
@@ -6,11 +8,29 @@ import styles from 'styles';
 
 class MainLayout extends Component {
   render() {
+    const { authentication } = this.props;
+
+    let loginBox = (
+      <Link className="navbar-item" to={'/auth/login'}>LOGIN</Link>
+    );
+
+    if (authentication && authentication.user) {
+      loginBox = (
+        <Link
+          className="navbar-item"
+          to={`/user/${authentication.user.username}`}
+        >
+          {`${authentication.user.username}`}
+        </Link>
+      );
+    }
+
     return (
       <div className={styles['main-layout']}>
         <Navbar
           title="Hellocuent"
-          link="/movies"
+          link="/"
+          loginBox={loginBox}
         />
         <div className={styles['main-layout-container']}>
             {this.props.children}
@@ -25,6 +45,7 @@ MainLayout.displayName = 'MainLayout';
 
 MainLayout.propTypes = {
   children: PropTypes.element,
+  authentication: PropTypes.object.isRequired,
 };
 
 MainLayout.contextTypes = {
@@ -32,4 +53,4 @@ MainLayout.contextTypes = {
   router: PropTypes.object.isRequired,
 };
 
-export default MainLayout;
+export default connect(({ authentication }) => ({ authentication }), {})(MainLayout);

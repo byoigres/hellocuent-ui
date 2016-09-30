@@ -66,10 +66,11 @@ function registerSuccess() {
   };
 }
 
-export function register(username, password, confirmPassword) {
+export function register(username, email, password, confirmPassword) {
   const body = new FormData();
 
   body.append('username', username);
+  body.append('email', email);
   body.append('password', password);
   body.append('confirmPassword', confirmPassword);
 

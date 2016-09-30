@@ -15,7 +15,7 @@ class Login extends Component {
   }
 
   componentWillMount() {
-    if (this.props.isLogged) {
+    if (this.props.isAuthenticated) {
       browserHistory.push('/');
     }
 
@@ -23,7 +23,7 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.isLogged) {
+    if (newProps.isAuthenticated) {
       browserHistory.push('/');
     }
 
@@ -73,7 +73,7 @@ class Login extends Component {
 Login.displayName = 'Login';
 
 Login.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   messages: PropTypes.object,
   message: PropTypes.string,
   login: PropTypes.func.isRequired,
@@ -81,7 +81,7 @@ Login.propTypes = {
 };
 
 Login.defaultProps = {
-  isLogged: false,
+  isAuthenticated: false,
 };
 
 function mapStateToProps(state) {
@@ -91,14 +91,14 @@ function mapStateToProps(state) {
       messages,
     },
     authentication: {
-      token,
+      isAuthenticated,
     },
   } = state;
 
   return {
     message,
     messages,
-    isLogged: (token && typeof token === 'string' && token.length > 0),
+    isAuthenticated,
   };
 }
 

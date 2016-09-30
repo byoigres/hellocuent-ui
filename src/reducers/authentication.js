@@ -1,7 +1,7 @@
 import * as constants from '../constants';
 
 const initialState = {
-  isLogged: false,
+  isAuthenticated: false,
   register: {
     complete: false,
   },
@@ -17,7 +17,7 @@ const authentication = (state = initialState, action) => {
     localStorage.setItem('user', JSON.stringify(user));
 
     return Object.assign({}, state, {
-      isLogged: true,
+      isAuthenticated: true,
       user,
     });
   }

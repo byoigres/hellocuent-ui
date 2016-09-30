@@ -5,6 +5,8 @@ import styles from 'styles';
 
 class Navbar extends Component {
   render() {
+    const { loginBox } = this.props;
+
     return (
       <div className={styles.navbar}>
         <div className={styles['navbar-container']}>
@@ -15,7 +17,7 @@ class Navbar extends Component {
             <input type="text" placeholder="Search" />
           </div>
           <div className="navbar-list">
-            <Link className="navbar-item" to={'/auth/login'}>LOGIN</Link>
+            {loginBox}
           </div>
         </div>
       </div>
@@ -26,6 +28,7 @@ class Navbar extends Component {
 Navbar.propTypes = {
   title: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
+  loginBox: PropTypes.node.isRequired,
 };
 
 export default Navbar;

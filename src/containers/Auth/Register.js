@@ -15,15 +15,15 @@ class Register extends Component {
   }
 
   componentWillMount() {
-    if (this.props.isLogged) {
-      browserHistory.push('/');
+    if (this.props.complete) {
+      // browserHistory.push('/');
     }
 
     this.props.resetErrors();
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.isLogged) {
+    if (newProps.isAuthenticated) {
       browserHistory.push('/');
     }
 
@@ -35,6 +35,7 @@ class Register extends Component {
 
     this.props.register(
       this.refs.username.getValue(),
+      this.refs.email.getValue(),
       this.refs.password.getValue(),
       this.refs.confirmPassword.getValue()
     );
@@ -47,7 +48,8 @@ class Register extends Component {
       return (
         <div className={styles['login-container']}>
           <div className={styles['login-box']}>
-            Check your email to activate your account.
+            <div>Check your email to activate your account.</div>
+            <Link to="/">Register another account</Link>
           </div>
         </div>
       );
@@ -59,9 +61,14 @@ class Register extends Component {
           <h2>Create an account</h2>
           <h3>{this.props.message}</h3>
           <TextBox
-            placeholder="Email"
+            placeholder="Username"
             error={messages.username}
             ref="username"
+          />
+          <TextBox
+            placeholder="Email"
+            error={messages.email}
+            ref="email"
           />
           <TextBox
             placeholder="Password"
@@ -98,7 +105,7 @@ Register.propTypes = {
 };
 
 Register.defaultProps = {
-  isLogged: false,
+  isAuthenticated: false,
 };
 
 function mapStateToProps(state) {
