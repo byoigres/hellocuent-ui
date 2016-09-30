@@ -2,6 +2,9 @@ import * as constants from '../constants';
 
 const initialState = {
   isLogged: false,
+  register: {
+    complete: false,
+  },
   user: null,
 };
 
@@ -18,6 +21,17 @@ const authentication = (state = initialState, action) => {
       user,
     });
   }
+
+  if (action.type === constants.REGISTER_SUCCESS) {
+    localStorage.clear();
+
+    return Object.assign({}, state, {
+      register: {
+        complete: true,
+      },
+    });
+  }
+
   return state;
 };
 

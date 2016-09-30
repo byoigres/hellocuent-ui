@@ -36,14 +36,55 @@ export function login(username, password) {
     body,
     credentials: 'same-origin',
     headers: {},
-  }).then(response =>
-    response.json().then(json => ({ json, response }))
-  ).then(({ json, response }) => {
+  })
+  .then(response => response.json().then(json => ({ json, response })))
+  .then(({ json, response }) => {
     if (!response.ok) {
       dispatch(loginFailure(json));
     } else {
       dispatch(setToken(json, response.headers.get('authorization')));
       dispatch(loginSuccess(json));
+    }
+  });
+}
+
+function registerFailure(response) {
+  return {
+    type: constants.REGISTER_FAILURE,
+    error: response.error || 'Something bad happened',
+  };
+}
+
+function registerSuccess() {
+  return {
+    type: constants.REGISTER_SUCCESS,
+    response: {
+      authentication: {
+        complete: true,
+      },
+    },
+  };
+}
+
+export function register(username, password, confirmPassword) {
+  const body = new FormData();
+
+  body.append('username', username);
+  body.append('password', password);
+  body.append('confirmPassword', confirmPassword);
+
+  return dispatch => fetch('/api/auth/register', {
+    method: 'POST',
+    body,
+    credentials: 'same-origin',
+    headers: {},
+  })
+  .then(response => response.json().then(json => ({ json, response })))
+  .then(({ json, response }) => {
+    if (!response.ok) {
+      dispatch(registerFailure(json));
+    } else {
+      dispatch(registerSuccess());
     }
   });
 }

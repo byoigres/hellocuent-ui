@@ -6,6 +6,7 @@ import CleanLayout from './components/Layouts/CleanLayout';
 // import Home from './containers/Home';
 
 import Login from './containers/Auth/Login';
+import Register from './containers/Auth/Register';
 import AddMovie from './containers/Movies/AddMovie';
 import ListMovies from './containers/Movies/ListMovies';
 import MovieDetails from './containers/Movies/MovieDetails';
@@ -24,6 +25,7 @@ export default (
     </Route>
     <Route path="/auth" component={CleanLayout}>
       <Route path="login" component={Login} />
+      <Route path="register" component={Register} />
     </Route>
   </div>
 );
