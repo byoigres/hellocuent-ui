@@ -53,6 +53,10 @@ ListMovies.propTypes = {
   getMovies: PropTypes.func.isRequired,
 };
 
+ListMovies.contextTypes = {
+  authentication: PropTypes.object,
+};
+
 function mapStateToProps(state) {
   let { movies } = state.entities;
 

@@ -14,6 +14,7 @@ const loadauthenticationData = () => {
       localStorage.getItem('user')) {
     return {
       authentication: {
+        isAuthenticated: true,
         token: localStorage.getItem('token'),
         user: JSON.parse(localStorage.getItem('user')),
       },

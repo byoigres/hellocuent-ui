@@ -7,6 +7,11 @@ import Navbar from '../Navbar';
 import styles from 'styles';
 
 class MainLayout extends Component {
+  getChildContext() {
+    return {
+      authentication: this.props.authentication,
+    };
+  }
   render() {
     const { authentication } = this.props;
 
@@ -51,6 +56,10 @@ MainLayout.propTypes = {
 MainLayout.contextTypes = {
   store: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
+};
+
+MainLayout.childContextTypes = {
+  authentication: PropTypes.object,
 };
 
 export default connect(({ authentication }) => ({ authentication }), {})(MainLayout);
