@@ -36,6 +36,7 @@ class Register extends Component {
     this.props.register(
       this.refs.username.getValue(),
       this.refs.email.getValue(),
+      this.refs.name.getValue(),
       this.refs.password.getValue(),
       this.refs.confirmPassword.getValue()
     );
@@ -69,6 +70,11 @@ class Register extends Component {
             placeholder="Email"
             error={messages.email}
             ref="email"
+          />
+          <TextBox
+            placeholder="Name"
+            error={messages.email}
+            ref="name"
           />
           <TextBox
             placeholder="Password"

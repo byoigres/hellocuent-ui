@@ -25,7 +25,7 @@ class MainLayout extends Component {
           className="navbar-item"
           to={`/user/${authentication.user.username}`}
         >
-          {`${authentication.user.username}`}
+          {`${authentication.user.name}`}
         </Link>
       );
     }
