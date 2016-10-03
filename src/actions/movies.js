@@ -51,7 +51,7 @@ export function searchOmdbMovie(criteria) {
   };
 }
 
-export function addMovie(title, year, imdbId, languageCode) {
+export function addMovie(title, year, imdbId, languageCode, poster) {
   return {
     [CALL_API]: {
       types: [
@@ -59,13 +59,14 @@ export function addMovie(title, year, imdbId, languageCode) {
         constants.ADD_MOVIE_SUCCESS,
         constants.ADD_MOVIE_FAILURE,
       ],
-      endpoint: 'api/movies/add',
+      endpoint: 'api/movies',
       method: 'POST',
       body: {
         title,
         year,
         imdbId,
         languageCode,
+        poster,
       },
       schema: Schemas.MOVIE,
     },

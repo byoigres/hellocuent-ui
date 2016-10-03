@@ -25,7 +25,7 @@ class ListMovies extends Component {
               <Link className={styles['movie-item-detail']} to={`/movies/${movie.id}`}>
                 <img
                   className={styles['movie-item-image']}
-                  src={`/images/${movie.id}.jpg`}
+                  src={`/images/${movie.poster}`}
                   alt=""
                 />
                 <span className={styles['movie-item-title']}>

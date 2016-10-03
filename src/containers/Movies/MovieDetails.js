@@ -25,7 +25,7 @@ class MovieDetails extends Component {
                 height: '22rem',
               }}
               alt={movieHeader}
-              src={`/images/${movie.id}.jpg`}
+              src={`/images/${movie.poster ? movie.poster : 'blank.png'}`}
             />
           </div>
           <div className={flexboxgrid['col-md-8']}>
@@ -118,6 +118,7 @@ MovieDetails.propTypes = {
     language: PropTypes.string,
     title: PropTypes.string,
     year: PropTypes.number,
+    poster: PropTypes.string,
   }),
   language: PropTypes.shape({
     code: PropTypes.string.isRequired,

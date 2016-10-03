@@ -6,6 +6,7 @@ import Header from 'components/Header';
 import TextBox from 'components/TextBox';
 import Select from 'components/Select';
 import Button from 'components/Button';
+import Dropzone from 'react-dropzone';
 
 import flexboxgrid from 'flexboxgrid';
 
@@ -13,7 +14,11 @@ class AddMovie extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      poster: null,
+    };
     this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
+    this.onDropImage = this.onDropImage.bind(this);
   }
 
   componentWillMount() {
@@ -21,12 +26,21 @@ class AddMovie extends Component {
     this.props.getLanguages();
   }
 
+  onDropImage(files) {
+    if (files.length > 0) {
+      this.setState({
+        poster: files[0],
+      });
+    }
+  }
+
   handleAddButtonClick() {
     this.props.addMovie(
       this.refs.title.getValue(),
       this.refs.year.getValue(),
       this.refs.imdbId.getValue(),
-      this.refs.language.getValue()
+      this.refs.language.getValue(),
+      this.state.poster
     );
   }
 
@@ -37,6 +51,9 @@ class AddMovie extends Component {
 
     return (
       <div className={`${flexboxgrid.row} ${flexboxgrid['start-xs']}`}>
+        <Dropzone onDrop={this.onDropImage}>
+          <div>Add image</div>
+        </Dropzone>
         <div className={colStyle}>
           <Header text="Add Movie" />
           <TextBox
