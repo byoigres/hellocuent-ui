@@ -11,6 +11,7 @@ import AddMovie from './containers/Movies/AddMovie';
 import ListMovies from './containers/Movies/ListMovies';
 import MovieDetails from './containers/Movies/MovieDetails';
 import AddTranslation from './containers/Movies/AddTranslation';
+import NotFound from './containers/Generic/NotFound';
 
 export default (
   <div>
@@ -27,5 +28,6 @@ export default (
       <Route path="login" component={Login} />
       <Route path="register" component={Register} />
     </Route>
+    <Route path="*" component={NotFound} />
   </div>
 );

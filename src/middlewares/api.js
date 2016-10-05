@@ -59,7 +59,7 @@ function callApi(requestInfo = {
     });
 }
 
-export default () => next => action => {
+export default (store) => next => action => {
   const callAPI = action[CALL_API];
 
   if (typeof callAPI === 'undefined') {
@@ -70,10 +70,11 @@ export default () => next => action => {
     endpoint,
     method,
     body,
-    headers,
     types,
     schema,
   } = callAPI;
+
+  let { headers } = callAPI;
 
   function actionWith(data) {
     const finalAction = Object.assign({}, action, data);
@@ -83,6 +84,19 @@ export default () => next => action => {
 
   const [requestType, successType, failureType] = types;
   next(actionWith({ type: requestType }));
+
+
+  const state = store.getState();
+
+  if (state.authentication.isAuthenticated) {
+    if (!headers) {
+      headers = {};
+    }
+
+    headers = {
+      Authorization: `Bearer ${state.authentication.token}`,
+    };
+  }
 
   return callApi({
     endpoint,
