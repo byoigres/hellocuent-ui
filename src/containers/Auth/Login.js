@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { login, resetErrors } from '../../actions';
 
 import { Link, browserHistory } from 'react-router';
+import AbsoluteMiddle from 'components/AbsoluteMiddle';
 import Button from 'components/Button';
 import TextBox from 'components/TextBox';
 import styles from 'styles';
@@ -43,7 +44,7 @@ class Login extends Component {
     const { messages } = this.props;
 
     return (
-      <div className={styles['login-container']}>
+      <AbsoluteMiddle>
         <div className={styles['login-box']}>
           <h2>Login</h2>
           <h3>{this.props.message}</h3>
@@ -65,7 +66,7 @@ class Login extends Component {
           />
           <Link to="/auth/register">Create an account</Link>
         </div>
-      </div>
+      </AbsoluteMiddle>
     );
   }
 }

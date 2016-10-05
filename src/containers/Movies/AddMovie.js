@@ -6,32 +6,21 @@ import Header from 'components/Header';
 import TextBox from 'components/TextBox';
 import Select from 'components/Select';
 import Button from 'components/Button';
-import Dropzone from 'react-dropzone';
+import DropZonePoster from 'components/DropZonePoster';
+import AbsoluteMiddle from 'components/AbsoluteMiddle';
 
-import flexboxgrid from 'flexboxgrid';
+import styles from 'styles';
 
 class AddMovie extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      poster: null,
-    };
     this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
-    this.onDropImage = this.onDropImage.bind(this);
   }
 
   componentWillMount() {
     this.props.resetErrors();
     this.props.getLanguages();
-  }
-
-  onDropImage(files) {
-    if (files.length > 0) {
-      this.setState({
-        poster: files[0],
-      });
-    }
   }
 
   handleAddButtonClick() {
@@ -40,21 +29,16 @@ class AddMovie extends Component {
       this.refs.year.getValue(),
       this.refs.imdbId.getValue(),
       this.refs.language.getValue(),
-      this.state.poster
+      this.refs.poster.getValue()
     );
   }
 
   render() {
     const { messages } = this.props;
-    const colStyle =
-      `${flexboxgrid['col-sm-12']} ${flexboxgrid['col-md-12']} ${flexboxgrid['col-lg-12']}`;
 
     return (
-      <div className={`${flexboxgrid.row} ${flexboxgrid['start-xs']}`}>
-        <Dropzone onDrop={this.onDropImage}>
-          <div>Add image</div>
-        </Dropzone>
-        <div className={colStyle}>
+      <div className={styles['add-movie']}>
+        <div>
           <Header text="Add Movie" />
           <TextBox
             placeholder="Original title"
@@ -84,6 +68,12 @@ class AddMovie extends Component {
             onClick={this.handleAddButtonClick}
           />
         </div>
+        <AbsoluteMiddle adjustSize={false}>
+          <DropZonePoster
+            text="Add Poster"
+            ref="poster"
+          />
+        </AbsoluteMiddle>
       </div>
     );
   }

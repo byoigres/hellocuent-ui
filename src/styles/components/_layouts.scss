@@ -1,7 +1,4 @@
 .main-layout {
-  //height: 100%;
-  //padding: 1rem;
-  //background-color: white;
   display: flex;
   margin-top: 4.5rem;
   justify-content: center;
@@ -26,7 +23,6 @@
 
   .movie-list-item {
     flex: 0 0 20%;
-    //outline: 1px solid black;
 
     .movie-item-detail {
       display: flex;
@@ -41,7 +37,6 @@
       }
 
       .movie-item-image {
-        //max-width: 6.25rem;
         max-height: 9.375rem;
         flex: 1;
       }
@@ -50,5 +45,15 @@
         padding-top: 0.7rem;
       }
     }
+  }
+}
+
+.add-movie {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+
+  > div {
+    flex: 0 0 50%;
   }
 }

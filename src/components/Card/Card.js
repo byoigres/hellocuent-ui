@@ -8,7 +8,7 @@ const Card = (props) => (
   </div>
 );
 
-Card.PropTypes = {
+Card.propTypes = {
   children: PropTypes.object.isRequired,
 };
 

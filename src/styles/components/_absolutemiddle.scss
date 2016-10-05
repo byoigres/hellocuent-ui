@@ -1,0 +1,9 @@
+.absolute-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.width-height {
+    height: 100%;
+  }
+}
