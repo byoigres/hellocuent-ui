@@ -24,8 +24,10 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.isAuthenticated) {
-      browserHistory.push('/');
+    const { redirectTo } = this.props.location.query;
+
+    if (newProps.isAuthenticated || redirectTo) {
+      browserHistory.push(redirectTo || '/');
     }
 
     return false;
@@ -44,7 +46,10 @@ class Login extends Component {
     const { messages } = this.props;
 
     return (
-      <AbsoluteMiddle>
+      <AbsoluteMiddle vertical>
+        <h1>
+          <Link to="/">hellocuent</Link>
+        </h1>
         <div className={styles['login-box']}>
           <h2>Login</h2>
           <h3>{this.props.message}</h3>
@@ -77,6 +82,7 @@ Login.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   messages: PropTypes.object,
   message: PropTypes.string,
+  location: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
   resetErrors: PropTypes.func.isRequired,
 };

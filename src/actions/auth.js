@@ -42,8 +42,8 @@ export function login(username, password) {
     if (!response.ok) {
       dispatch(loginFailure(json));
     } else {
-      dispatch(setToken(json, response.headers.get('authorization')));
       dispatch(loginSuccess(json));
+      dispatch(setToken(json, response.headers.get('authorization')));
     }
   });
 }

@@ -1,24 +1,43 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import styles from 'styles';
 
-const AbsoluteMiddle = ({ children, adjustSize }) => (
-  <div
-    className={
-      `${styles['absolute-middle']}${adjustSize ? ` ${styles['width-height']}` : ''}`
+class AbsoluteMiddle extends Component {
+  render() {
+    const { children, adjustSize, vertical } = this.props;
+
+    let classes = styles['absolute-middle'];
+
+    if (adjustSize) {
+      classes = `${classes} ${styles['width-height']}`;
     }
-  >
-    {children}
-  </div>
-);
+
+    if (vertical) {
+      classes = `${classes} ${styles.vertical}`;
+    }
+
+    return (
+      <div
+        className={classes}
+      >
+        {children}
+      </div>
+    );
+  }
+}
 
 AbsoluteMiddle.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.array,
+  ]).isRequired,
   adjustSize: PropTypes.bool,
+  vertical: PropTypes.bool,
 };
 
 AbsoluteMiddle.defaultProps = {
   adjustSize: true,
+  vertical: false,
 };
 
 export default AbsoluteMiddle;

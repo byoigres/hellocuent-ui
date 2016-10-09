@@ -39,6 +39,7 @@ class ListMovies extends Component {
           <Button
             text="Add Movie"
             link="/movies/add"
+            block
           />
         </div>
       </div>

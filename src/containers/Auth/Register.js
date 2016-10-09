@@ -17,7 +17,7 @@ class Register extends Component {
 
   componentWillMount() {
     if (this.props.complete) {
-      // browserHistory.push('/');
+      browserHistory.push('/');
     }
 
     this.props.resetErrors();
@@ -58,7 +58,10 @@ class Register extends Component {
     }
 
     return (
-      <AbsoluteMiddle>
+      <AbsoluteMiddle vertical>
+        <h1>
+          <Link to="/">hellocuent</Link>
+        </h1>
         <div className={styles['login-box']}>
           <h2>Create an account</h2>
           <h3>{this.props.message}</h3>

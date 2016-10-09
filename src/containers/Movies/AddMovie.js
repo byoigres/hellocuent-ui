@@ -65,6 +65,7 @@ class AddMovie extends Component {
           />
           <Button
             text="Add"
+            block
             onClick={this.handleAddButtonClick}
           />
         </div>

@@ -6,4 +6,9 @@
   &.width-height {
     height: 100%;
   }
+
+  &.vertical {
+    flex-direction: column;
+  }
+
 }

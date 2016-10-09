@@ -88,7 +88,8 @@ export default (store) => next => action => {
 
   const state = store.getState();
 
-  if (state.authentication.isAuthenticated) {
+  if (state.authentication.isAuthenticated &&
+      state.authentication.token) {
     if (!headers) {
       headers = {};
     }

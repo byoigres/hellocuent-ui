@@ -19,6 +19,7 @@ const authentication = (state = initialState, action) => {
     return Object.assign({}, state, {
       isAuthenticated: true,
       user,
+      token,
     });
   }
 
