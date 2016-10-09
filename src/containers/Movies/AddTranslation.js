@@ -5,7 +5,9 @@ import {
   getCountries,
   getLanguagesByCountry,
   addTranslation,
-  resetErrors } from '../../actions';
+  initTranslation,
+  resetErrors
+} from '../../actions';
 
 import { Link } from 'react-router';
 
@@ -26,6 +28,7 @@ class AddTranslation extends Component {
 
   componentWillMount() {
     const { movieId } = this.props.routeParams;
+    this.props.initTranslation();
     this.props.resetErrors();
     this.props.getMovie(movieId);
     this.props.getCountries();
@@ -136,6 +139,7 @@ AddTranslation.propTypes = {
   getLanguagesByCountry: PropTypes.func.isRequired,
   addTranslation: PropTypes.func.isRequired,
   routeParams: PropTypes.object.isRequired,
+  initTranslation: PropTypes.func.isRequired,
   resetErrors: PropTypes.func.isRequired,
 };
 
@@ -184,5 +188,6 @@ export default connect(mapStateToProps, {
   getCountries,
   getLanguagesByCountry,
   addTranslation,
+  initTranslation,
   resetErrors,
 })(AddTranslation);
