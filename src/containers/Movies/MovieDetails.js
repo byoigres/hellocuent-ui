@@ -96,6 +96,12 @@ class MovieDetails extends Component {
   }
 
   render() {
+    if (this.props.notFound) {
+      return (
+        <h1>Movie not found</h1>
+      );
+    }
+
     return (
       <div className={flexboxgrid.row}>
         <div className={flexboxgrid['col-md-12']}>
@@ -133,6 +139,7 @@ MovieDetails.propTypes = {
   })),
   countries: PropTypes.object,
   languages: PropTypes.object,
+  notFound: PropTypes.bool.isRequired,
   routeParams: PropTypes.object.isRequired,
   getMovie: PropTypes.func.isRequired,
 };
@@ -143,7 +150,7 @@ function mapStateToProps(state, props) {
     languages,
     translations,
     countries,
-    movies: movies,
+    movies,
   } = state.entities;
 
   const movie = movies[movieId] || { translations: [] };
@@ -158,6 +165,7 @@ function mapStateToProps(state, props) {
     countries,
     languages,
     translations: movieTranslations,
+    notFound: Object.keys(movies).length === 0,
   };
 }
 
