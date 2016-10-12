@@ -6,7 +6,7 @@ import {
   getLanguagesByCountry,
   addTranslation,
   initTranslation,
-  resetErrors
+  resetErrors,
 } from '../../actions';
 
 import { Link } from 'react-router';
@@ -16,7 +16,7 @@ import TextBox from 'components/TextBox';
 import Select from 'components/Select';
 import Button from 'components/Button';
 
-import flexboxgrid from 'flexboxgrid';
+import styles from 'styles';
 
 class AddTranslation extends Component {
 
@@ -64,8 +64,7 @@ class AddTranslation extends Component {
   render() {
     const { title, countries, languages, messages } = this.props;
     const { movieId } = this.props.routeParams;
-    const colStyle =
-      `${flexboxgrid['col-sm-12']} ${flexboxgrid['col-md-12']} ${flexboxgrid['col-lg-12']}`;
+    const colStyle = '';
 
     const countryList = Object.keys(countries).map(item => ({
       id: countries[item].code,
@@ -82,7 +81,7 @@ class AddTranslation extends Component {
     }
 
     return (
-      <div className={`${flexboxgrid.row} ${flexboxgrid['start-xs']}`}>
+      <div className={styles['add-translation']}>
         <div className={colStyle}>
           <Header text="Add Translation" />
           <Link to={`/movies/${movieId}`}>{title}</Link>

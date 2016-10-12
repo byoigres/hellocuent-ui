@@ -26,7 +26,7 @@ class Login extends Component {
   componentWillReceiveProps(newProps) {
     const { redirectTo } = this.props.location.query;
 
-    if (newProps.isAuthenticated || redirectTo) {
+    if (newProps.isAuthenticated) {
       browserHistory.push(redirectTo || '/');
     }
 
@@ -46,32 +46,34 @@ class Login extends Component {
     const { messages } = this.props;
 
     return (
-      <AbsoluteMiddle vertical>
+      <div style={{ height: '100%' }}>
         <h1>
           <Link to="/">hellocuent</Link>
         </h1>
-        <div className={styles['login-box']}>
-          <h2>Login</h2>
-          <h3>{this.props.message}</h3>
-          <TextBox
-            placeholder="Email"
-            error={messages.username}
-            ref="username"
-          />
-          <TextBox
-            placeholder="Password"
-            type="password"
-            error={messages.password}
-            ref="password"
-          />
-          <Button
-            text="Login"
-            block
-            onClick={this.handlerLoginClick}
-          />
-          <Link to="/auth/register">Create an account</Link>
-        </div>
-      </AbsoluteMiddle>
+        <AbsoluteMiddle vertical>
+          <div className={styles['login-box']}>
+            <h2>Login</h2>
+            <h3>{this.props.message}</h3>
+            <TextBox
+              placeholder="Email"
+              error={messages.username}
+              ref="username"
+            />
+            <TextBox
+              placeholder="Password"
+              type="password"
+              error={messages.password}
+              ref="password"
+            />
+            <Button
+              text="Login"
+              block
+              onClick={this.handlerLoginClick}
+            />
+            <Link to="/auth/register">Create an account</Link>
+          </div>
+        </AbsoluteMiddle>
+      </div>
     );
   }
 }

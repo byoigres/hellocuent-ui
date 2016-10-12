@@ -2,7 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getMovie } from '../../actions';
 import Button from 'components/Button';
-import flexboxgrid from 'flexboxgrid';
+import AbsoluteMiddle from 'components/AbsoluteMiddle';
+import { Link } from 'react-router';
+
+import styles from 'styles';
 
 class MovieDetails extends Component {
 
@@ -18,23 +21,24 @@ class MovieDetails extends Component {
       const imdbUrl = `http://imdb.com/title/${movie.imdbId}`;
 
       return (
-        <div className={`${flexboxgrid.row} ${flexboxgrid['middle-lg']}`}>
-          <div className={flexboxgrid['col-md-4']}>
-            <img
-              style={{
-                height: '22rem',
-              }}
-              alt={movieHeader}
-              src={`/images/${movie.poster ? movie.poster : 'blank.png'}`}
-            />
+        <div className={styles['movie-details-content']}>
+          <div className={styles['movie-details-image-container']}>
+            <AbsoluteMiddle>
+              <img
+                alt={movieHeader}
+                src={`/images/${movie.poster ? movie.poster : 'blank.png'}`}
+              />
+            </AbsoluteMiddle>
           </div>
-          <div className={flexboxgrid['col-md-8']}>
-            <div>
-              <h1>{movieHeader}</h1>
-              <a href={imdbUrl} target="_blank">{imdbUrl}</a>
-              <div>Original language: {language.name}</div>
-              <div>{translations.length} translations</div>
-            </div>
+          <div className={styles['movie-details-content']}>
+            <AbsoluteMiddle>
+              <div>
+                <h1>{movieHeader}</h1>
+                <a href={imdbUrl} target="_blank">{imdbUrl}</a>
+                <div>Original language: {language.name}</div>
+                <div>{translations.length} translations</div>
+              </div>
+            </AbsoluteMiddle>
           </div>
         </div>
       );
@@ -48,14 +52,14 @@ class MovieDetails extends Component {
     const { translations, countries, languages } = this.props;
 
     let translationsBox = (
-      <div className={flexboxgrid['col-md-12']}>
+      <div>
         <h2>No translations</h2>
       </div>
     );
 
     if (translations.length > 0) {
       translationsBox = (
-        <div className={flexboxgrid['col-md-12']}>
+        <div>
           <h2>Translations</h2>
           <table>
             <thead>
@@ -73,7 +77,10 @@ class MovieDetails extends Component {
                   <td>{countries[item.country].name}</td>
                   <td>{languages[item.language].name}</td>
                   <td>{item.title}</td>
-                  <td>Suicide Squadron</td>
+                  <td>{
+                    item.innerTranslation.length > 0 ?
+                    item.innerTranslation : <Link to="/add">Add</Link>
+                  }</td>
                   <td>{item.description}</td>
                 </tr>
               ))}
@@ -84,7 +91,7 @@ class MovieDetails extends Component {
     }
 
     return (
-      <div className={flexboxgrid.row}>
+      <div>
         {translationsBox}
         <Button
           text="Add translation"
@@ -103,13 +110,9 @@ class MovieDetails extends Component {
     }
 
     return (
-      <div className={flexboxgrid.row}>
-        <div className={flexboxgrid['col-md-12']}>
-          {this.renderMovie()}
-        </div>
-        <div className={flexboxgrid['col-md-12']}>
-          {this.renderTranslations()}
-        </div>
+      <div className={styles['movie-details']}>
+        {this.renderMovie()}
+        {this.renderTranslations()}
       </div>
     );
   }
@@ -151,13 +154,40 @@ function mapStateToProps(state, props) {
     translations,
     countries,
     movies,
+    innerTranslation,
   } = state.entities;
 
   const movie = movies[movieId] || { translations: [] };
 
   const language = (languages[movie.language || null]) || { code: '', name: '' };
   const translationList = movie.translations || [];
-  const movieTranslations = translationList.map((item) => translations[item]);
+
+  /*
+  const movieTranslations = translationList.map((item) => {
+    const translation = translations[item];
+
+    const innerTranslations = translation.innerTranslations
+      .map((innerTranslationId) => innerTranslation[innerTranslationId]);
+
+    return Object.assign({}, translation, {
+      innerTranslations,
+    });
+  });
+  */
+
+  const movieTranslations = translationList.map((item) => {
+    const translation = translations[item];
+
+    let innerTranslationTitle = '';
+
+    if (translation.innerTranslations.length > 0) {
+      innerTranslationTitle = innerTranslation[translation.innerTranslations[0]].title;
+    }
+
+    return Object.assign({}, translation, {
+      innerTranslation: innerTranslationTitle,
+    });
+  });
 
   return {
     movie,
