@@ -72,7 +72,7 @@ export function addMovie(title, year, imdbId, languageCode, poster) {
     },
   };
 }
-
+/*
 export function getLanguages() {
   return {
     [CALL_API]: {
@@ -87,3 +87,4 @@ export function getLanguages() {
     },
   };
 }
+*/

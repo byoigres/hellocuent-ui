@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getMovie } from '../../actions';
 import Button from 'components/Button';
+import EditLanguageTranslation from 'components/EditLanguageTranslation';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
-import { Link } from 'react-router';
 
 import styles from 'styles';
 
@@ -11,7 +11,13 @@ class MovieDetails extends Component {
 
   componentWillMount() {
     const { movieId } = this.props.routeParams;
+    this.saveLanguageTranslation = this.saveLanguageTranslation.bind(this);
     this.props.getMovie(movieId);
+  }
+
+  saveLanguageTranslation(value) {
+    /* eslint no-console: 0 */
+    console.log('value', value);
   }
 
   renderMovie() {
@@ -47,6 +53,15 @@ class MovieDetails extends Component {
     return null;
   }
 
+  renderEditControl() {
+    return (
+      <EditLanguageTranslation
+        saveFunction={this.saveLanguageTranslation}
+        ref={(edit) => this.edit = edit}
+      />
+    );
+  }
+
   renderTranslations() {
     const { movieId } = this.props.routeParams;
     const { translations, countries, languages } = this.props;
@@ -79,7 +94,8 @@ class MovieDetails extends Component {
                   <td>{item.title}</td>
                   <td>{
                     item.innerTranslation.length > 0 ?
-                    item.innerTranslation : <Link to="/add">Add</Link>
+                    item.innerTranslation :
+                      this.renderEditControl()
                   }</td>
                   <td>{item.description}</td>
                 </tr>
@@ -166,11 +182,11 @@ function mapStateToProps(state, props) {
   const movieTranslations = translationList.map((item) => {
     const translation = translations[item];
 
-    const innerTranslations = translation.innerTranslations
+    const languageTranslations = translation.languageTranslations
       .map((innerTranslationId) => innerTranslation[innerTranslationId]);
 
     return Object.assign({}, translation, {
-      innerTranslations,
+      languageTranslations,
     });
   });
   */
@@ -180,8 +196,8 @@ function mapStateToProps(state, props) {
 
     let innerTranslationTitle = '';
 
-    if (translation.innerTranslations.length > 0) {
-      innerTranslationTitle = innerTranslation[translation.innerTranslations[0]].title;
+    if (translation.languageTranslations.length > 0) {
+      innerTranslationTitle = innerTranslation[translation.languageTranslations[0]].title;
     }
 
     return Object.assign({}, translation, {

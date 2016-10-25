@@ -4,7 +4,7 @@ import styles from 'styles';
 
 class TextBox extends Component {
   getValue() {
-    return this.refs.input.value;
+    return this.input.value;
   }
 
   render() {
@@ -36,7 +36,7 @@ class TextBox extends Component {
             className={textboxStyles}
             type="text"
             {...props}
-            ref="input"
+            ref={(input) => this.input = input}
             value={text}
           />
         </div>

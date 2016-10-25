@@ -7,6 +7,7 @@
   },
   "rules": {
     "react/prefer-stateless-function": 0,
+    "no-return-assign": 0,
     "import/no-unresolved": [
       2, {
         "ignore": ["style", "^components/"]

@@ -1,4 +1,5 @@
 import { CALL_API } from '../middlewares/api';
+import { Schemas } from '../middlewares/schemas';
 import * as constants from '../constants';
 
 export function initTranslation() {
@@ -7,6 +8,20 @@ export function initTranslation() {
   };
 }
 
+export function getTranslation(id) {
+  return {
+    [CALL_API]: {
+      types: [
+        constants.GET_TRANSLATION_REQUEST,
+        constants.GET_TRANSLATION_SUCCESS,
+        constants.GET_TRANSLATION_FAILURE,
+      ],
+      endpoint: `api/translation/${id}`,
+      method: 'GET',
+      schema: Schemas.TRANSLATION,
+    },
+  };
+}
 
 export function addTranslation(
   movieId,

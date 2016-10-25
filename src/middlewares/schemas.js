@@ -17,7 +17,7 @@ movie.define({
 translation.define({
   country,
   language,
-  innerTranslations: arrayOf(innerTranslation),
+  languageTranslations: arrayOf(innerTranslation),
 });
 
 country.define({
