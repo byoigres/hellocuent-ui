@@ -48,3 +48,21 @@ export function addTranslation(
     },
   };
 }
+
+export function addLanguageTranlation(translationId, title) {
+  return {
+    [CALL_API]: {
+      types: [
+        constants.ADD_LANGUAGE_TRANSLATION_REQUEST,
+        constants.ADD_LANGUAGE_TRANSLATION_SUCCESS,
+        constants.ADD_LANGUAGE_TRANSLATION_FAILURE,
+      ],
+      endpoint: 'api/translation/language',
+      method: 'POST',
+      body: {
+        translationId,
+        title,
+      },
+    },
+  };
+}

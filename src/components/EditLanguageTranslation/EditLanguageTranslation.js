@@ -22,7 +22,7 @@ class EditlanguageTranslation extends Component {
   }
 
   saveClick() {
-    this.props.saveFunction(this.editInput.getValue());
+    this.props.saveFunction(this.props.translationId, this.editInput.getValue());
 
     this.setState({
       displayControls: false,
@@ -73,6 +73,7 @@ class EditlanguageTranslation extends Component {
 
 EditlanguageTranslation.propTypes = {
   saveFunction: PropTypes.func.isRequired,
+  translationId: PropTypes.string.isRequired,
 };
 
 export default EditlanguageTranslation;

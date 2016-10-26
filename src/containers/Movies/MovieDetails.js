@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getMovie } from '../../actions';
+import { getMovie, addLanguageTranlation } from '../../actions';
 import Button from 'components/Button';
 import EditLanguageTranslation from 'components/EditLanguageTranslation';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
@@ -15,9 +15,10 @@ class MovieDetails extends Component {
     this.props.getMovie(movieId);
   }
 
-  saveLanguageTranslation(value) {
+  saveLanguageTranslation(translationId, title) {
     /* eslint no-console: 0 */
-    console.log('value', value);
+    console.log('saveLanguageTranslation', title, translationId);
+    this.props.addLanguageTranlation(translationId, title);
   }
 
   renderMovie() {
@@ -53,9 +54,10 @@ class MovieDetails extends Component {
     return null;
   }
 
-  renderEditControl() {
+  renderEditControl(id) {
     return (
       <EditLanguageTranslation
+        translationId={id}
         saveFunction={this.saveLanguageTranslation}
         ref={(edit) => this.edit = edit}
       />
@@ -95,7 +97,7 @@ class MovieDetails extends Component {
                   <td>{
                     item.innerTranslation.length > 0 ?
                     item.innerTranslation :
-                      this.renderEditControl()
+                      this.renderEditControl(item.id)
                   }</td>
                   <td>{item.description}</td>
                 </tr>
@@ -161,6 +163,7 @@ MovieDetails.propTypes = {
   notFound: PropTypes.bool.isRequired,
   routeParams: PropTypes.object.isRequired,
   getMovie: PropTypes.func.isRequired,
+  addLanguageTranlation: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, props) {
@@ -217,4 +220,5 @@ function mapStateToProps(state, props) {
 
 export default connect(mapStateToProps, {
   getMovie,
+  addLanguageTranlation,
 })(MovieDetails);
