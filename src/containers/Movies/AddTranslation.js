@@ -84,7 +84,7 @@ class AddTranslation extends Component {
       <div className={styles['add-translation']}>
         <div className={colStyle}>
           <Header text="Add Translation" />
-          <Link to={`/movies/${movieId}`}>{title}</Link>
+          <Link to={`/movies/${movieId}`}>Back to <i>{title}</i></Link>
           <TextBox
             placeholder="Title"
             ref="title"

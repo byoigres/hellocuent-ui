@@ -6,7 +6,11 @@ class App extends Component {
   render() {
     return (
       <Provider store={this.props.store}>
-        <Router history={this.props.history} routes={this.props.routes} />
+        <Router
+          onUpdate={() => window.scrollTo(0, 0)}
+          history={this.props.history}
+          routes={this.props.routes}
+        />
       </Provider>
     );
   }

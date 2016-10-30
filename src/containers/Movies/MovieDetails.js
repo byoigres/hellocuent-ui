@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getMovie, addLanguageTranlation } from '../../actions';
 import Button from 'components/Button';
-import EditLanguageTranslation from 'components/EditLanguageTranslation';
+import EditBox from 'components/EditBox';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
 
 import styles from 'styles';
@@ -15,9 +15,9 @@ class MovieDetails extends Component {
     this.props.getMovie(movieId);
   }
 
-  saveLanguageTranslation(translationId, title) {
+  saveLanguageTranslation(title, translationId) {
     /* eslint no-console: 0 */
-    console.log('saveLanguageTranslation', title, translationId);
+    // console.log('saveLanguageTranslation', title, translationId);
     this.props.addLanguageTranlation(translationId, title);
   }
 
@@ -56,9 +56,10 @@ class MovieDetails extends Component {
 
   renderEditControl(id) {
     return (
-      <EditLanguageTranslation
-        translationId={id}
-        saveFunction={this.saveLanguageTranslation}
+      <EditBox
+        text="Add Translation"
+        loadingText="Saving..."
+        onSaveClick={(value) => this.saveLanguageTranslation(value, id)}
         ref={(edit) => this.edit = edit}
       />
     );
@@ -95,8 +96,8 @@ class MovieDetails extends Component {
                   <td>{languages[item.language].name}</td>
                   <td>{item.title}</td>
                   <td>{
-                    item.innerTranslation.length > 0 ?
-                    item.innerTranslation :
+                    item.languageTranslation.length > 0 ?
+                    item.languageTranslation :
                       this.renderEditControl(item.id)
                   }</td>
                   <td>{item.description}</td>
@@ -173,7 +174,7 @@ function mapStateToProps(state, props) {
     translations,
     countries,
     movies,
-    innerTranslation,
+    languageTranslation,
   } = state.entities;
 
   const movie = movies[movieId] || { translations: [] };
@@ -186,7 +187,7 @@ function mapStateToProps(state, props) {
     const translation = translations[item];
 
     const languageTranslations = translation.languageTranslations
-      .map((innerTranslationId) => innerTranslation[innerTranslationId]);
+      .map((languageTranslationId) => languageTranslation[languageTranslationId]);
 
     return Object.assign({}, translation, {
       languageTranslations,
@@ -197,14 +198,14 @@ function mapStateToProps(state, props) {
   const movieTranslations = translationList.map((item) => {
     const translation = translations[item];
 
-    let innerTranslationTitle = '';
+    let languageTranslationTitle = '';
 
     if (translation.languageTranslations.length > 0) {
-      innerTranslationTitle = innerTranslation[translation.languageTranslations[0]].title;
+      languageTranslationTitle = languageTranslation[translation.languageTranslations[0]].title;
     }
 
     return Object.assign({}, translation, {
-      innerTranslation: innerTranslationTitle,
+      languageTranslation: languageTranslationTitle,
     });
   });
 

@@ -63,6 +63,7 @@ export function addLanguageTranlation(translationId, title) {
         translationId,
         title,
       },
+      schema: Schemas.LANGUAGE_TRANSLATION,
     },
   };
 }

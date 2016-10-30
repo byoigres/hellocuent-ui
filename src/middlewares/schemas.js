@@ -2,9 +2,8 @@ import { Schema, arrayOf } from 'normalizr';
 
 const user = new Schema('users');
 const movie = new Schema('movies');
-const omdbMovie = new Schema('omdbMovie');
 const translation = new Schema('translations');
-const innerTranslation = new Schema('innerTranslation');
+const languageTranslation = new Schema('languageTranslation');
 const country = new Schema('countries', { idAttribute: 'code' });
 const language = new Schema('languages', { idAttribute: 'code' });
 
@@ -17,14 +16,14 @@ movie.define({
 translation.define({
   country,
   language,
-  languageTranslations: arrayOf(innerTranslation),
+  languageTranslations: arrayOf(languageTranslation),
 });
 
 country.define({
   languages: arrayOf(language),
 });
 
-innerTranslation.define({
+languageTranslation.define({
   language,
 });
 
@@ -38,7 +37,6 @@ export const Schemas = {
   LANGUAGE: language,
   LANGUAGES: arrayOf(language),
   TRANSLATION: translation,
-  INNERTRANSLATION: innerTranslation,
-  INNERTRANSLATIONS: arrayOf(innerTranslation),
-  OMDBMOVIE: omdbMovie,
+  LANGUAGE_TRANSLATION: languageTranslation,
+  LANGUAGE_TRANSLATIONS: arrayOf(languageTranslation),
 };
