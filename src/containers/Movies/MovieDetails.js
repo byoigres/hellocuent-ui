@@ -16,8 +16,6 @@ class MovieDetails extends Component {
   }
 
   saveLanguageTranslation(title, translationId) {
-    /* eslint no-console: 0 */
-    // console.log('saveLanguageTranslation', title, translationId);
     this.props.addLanguageTranlation(translationId, title);
   }
 
@@ -58,6 +56,7 @@ class MovieDetails extends Component {
     return (
       <EditBox
         text="Add Translation"
+        loading={this.props.loaders.languageTranslation}
         loadingText="Saving..."
         onSaveClick={(value) => this.saveLanguageTranslation(value, id)}
         ref={(edit) => this.edit = edit}
@@ -161,6 +160,7 @@ MovieDetails.propTypes = {
   })),
   countries: PropTypes.object,
   languages: PropTypes.object,
+  loaders: PropTypes.object.isRequired,
   notFound: PropTypes.bool.isRequired,
   routeParams: PropTypes.object.isRequired,
   getMovie: PropTypes.func.isRequired,
@@ -176,24 +176,12 @@ function mapStateToProps(state, props) {
     movies,
     languageTranslation,
   } = state.entities;
+  const { loaders } = state;
 
   const movie = movies[movieId] || { translations: [] };
 
   const language = (languages[movie.language || null]) || { code: '', name: '' };
   const translationList = movie.translations || [];
-
-  /*
-  const movieTranslations = translationList.map((item) => {
-    const translation = translations[item];
-
-    const languageTranslations = translation.languageTranslations
-      .map((languageTranslationId) => languageTranslation[languageTranslationId]);
-
-    return Object.assign({}, translation, {
-      languageTranslations,
-    });
-  });
-  */
 
   const movieTranslations = translationList.map((item) => {
     const translation = translations[item];
@@ -216,6 +204,7 @@ function mapStateToProps(state, props) {
     languages,
     translations: movieTranslations,
     notFound: Object.keys(movies).length === 0,
+    loaders,
   };
 }
 
