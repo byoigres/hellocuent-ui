@@ -31,10 +31,14 @@ class MovieDetails extends Component {
       return (
         <div
           className={styles['movie-details-content']}
-          style={{
-            backgroundImage: `url(/images/${movie.poster ? movie.poster : 'blank.png'})`,
-          }}
         >
+          <div
+            className={styles['background-image']}
+            style={{
+              backgroundImage: `url(/images/${movie.poster ? movie.poster : 'blank.png'})`,
+            }}
+          ></div>
+          <div className={styles['background-image-overlay']}></div>
           <div className={styles['movie-details-image-container']}>
             <AbsoluteMiddle>
               <img
