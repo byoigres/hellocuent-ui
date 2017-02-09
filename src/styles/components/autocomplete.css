@@ -7,8 +7,8 @@
     width: 100%;
     top: 2rem;
     list-style: none;
-    background-color: $full-white;
-    border: 0.15rem solid $primary-color-1;
+    background-color: var(--full-white);
+    border: 0.15rem solid var(--primary-color-1);
     border-top: none;
     padding-left: 0rem;
 
@@ -17,8 +17,8 @@
       padding: 0.35rem 1rem;
 
       &:hover {
-        color: $full-white;
-        background-color: $primary-color-2;
+        color: var(--full-white);
+        background-color: var(--primary-color-2);
       }
     }
 

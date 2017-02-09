@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { addMovie, getLanguages, resetErrors } from '../../actions';
+import { Link } from 'react-router';
 
 import Header from 'components/Header';
 import TextBox from 'components/TextBox';
@@ -8,6 +9,7 @@ import Select from 'components/Select';
 import Button from 'components/Button';
 import DropZonePoster from 'components/DropZonePoster';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
+import NavigationBar from 'components/NavigationBar';
 
 import styles from 'styles';
 
@@ -36,10 +38,20 @@ class AddMovie extends Component {
   render() {
     const { messages } = this.props;
 
+    const navBarItems = [
+      {
+        text: 'Movies',
+        href: '/movies',
+      },
+      {
+        text: 'Add movie',
+      },
+    ];
+
     return (
       <div className={styles['add-movie']}>
         <div>
-          <Header text="Add Movie" />
+          <NavigationBar items={navBarItems} selectedIndex={2} />
           <TextBox
             placeholder="Original title"
             ref="title"

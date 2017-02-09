@@ -47,11 +47,11 @@ class Login extends Component {
 
     return (
       <div style={{ height: '100%' }}>
-        <h1>
-          <Link to="/">hellocuent</Link>
-        </h1>
         <AbsoluteMiddle vertical>
           <div className={styles['login-box']}>
+            <h1>
+              <Link to="/">hellocuent</Link>
+            </h1>
             <h2>Login</h2>
             <h3>{this.props.message}</h3>
             <TextBox

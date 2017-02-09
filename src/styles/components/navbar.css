@@ -1,0 +1,85 @@
+.navbar {
+  background-color: var(--primary-color-1);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  & .navbar-container {
+    display: flex;
+    max-width: 76rem;
+    width: 100%;
+    max-height: 4rem;
+
+    & .navbar-brand {
+      & a {
+        display: block;
+        font-weight: bold;
+        padding: 0.36em 0.5rem;
+        font-size: 1.7rem;
+        color: var(--full-white);
+
+        &:hover {
+          color: var(--primary-color-2);
+        }
+      }
+    }
+
+    & .navbar-search {
+      flex: 1;
+      & > input[type="text"] {
+        background-color: var(--faint-black);
+        color: var(--full-white);
+        font-size: 2rem;
+        padding: 0 1rem;
+        height: 100%;
+        border: none;
+        width: 100%;
+
+        &::placeholder {
+            color: var(--full-white);
+            opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  & .navbar-list {
+    display: flex;
+    align-items: center;
+
+
+    & a.navbar-item {
+      flex: 1;
+      flex-grow: 1;
+      color: var(--full-white);
+      padding: 1.1rem 0.5rem;
+
+      &:hover {
+        background-color: var(--primary-color-2);
+      }
+    }
+  }
+
+  & .navbar-link {
+    color: var(--full-white);
+    display: inline;
+    float: right;
+    cursor: pointer;
+
+    & a {
+      color: var(--full-white);
+      display: block;
+      padding: 1.2em 0.5rem;
+      margin: 0;
+
+      &:hover {
+        background-color: var(--primary-color-2);
+      }
+    }
+  }
+}

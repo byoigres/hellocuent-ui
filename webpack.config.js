@@ -36,7 +36,7 @@ var webpackConfig = {
   },
   resolve: {
     modulesDirectories: ['src', 'node_modules'],
-    extensions: ['', '.js', 'json', '.jsx', '.scss', 'css'],
+    extensions: ['', '.js', 'json', '.jsx', '.scss', '.css'],
     alias: {
       'flexboxgrid': 'flexboxgrid/dist/flexboxgrid.css'
     }
@@ -50,9 +50,9 @@ var webpackConfig = {
         include: path.join(__dirname, 'src')
       },
       {
-        test: /\.(css|scss)$/,
+        test: /\.css$/,
         //loaders: ['style', 'css?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'sass']
-        loaders: ['style', 'css?sourceMap&modules&localIdentName=[local]', 'sass']
+        loaders: ['style', 'css?sourceMap&modules&localIdentName=[local]', 'postcss']
       }
     ]
   },

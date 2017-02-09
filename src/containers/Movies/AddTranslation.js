@@ -15,6 +15,7 @@ import Header from 'components/Header';
 import TextBox from 'components/TextBox';
 import Select from 'components/Select';
 import Button from 'components/Button';
+import NavigationBar from 'components/NavigationBar';
 
 import styles from 'styles';
 
@@ -64,7 +65,6 @@ class AddTranslation extends Component {
   render() {
     const { title, countries, languages, messages } = this.props;
     const { movieId } = this.props.routeParams;
-    const colStyle = '';
 
     const countryList = Object.keys(countries).map(item => ({
       id: countries[item].code,
@@ -80,11 +80,24 @@ class AddTranslation extends Component {
       }));
     }
 
+    const navBarItems = [
+      {
+        text: 'Movies',
+        href: '/movies',
+      },
+      {
+        text: title,
+        href: `/movies/${movieId}`,
+      },
+      {
+        text: 'Add translation',
+      },
+    ];
+
     return (
       <div className={styles['add-translation']}>
-        <div className={colStyle}>
-          <Header text="Add Translation" />
-          <Link to={`/movies/${movieId}`}>Back to <i>{title}</i></Link>
+        <div>
+          <NavigationBar items={navBarItems} selectedIndex={3} />
           <TextBox
             placeholder="Title"
             ref="title"
@@ -173,7 +186,7 @@ function mapStateToProps(state, props) {
   }
 
   return {
-    title: movie.title,
+    title: `${movie.title} (${movie.year})`,
     countries,
     languages,
     message,

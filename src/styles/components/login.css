@@ -1,5 +1,5 @@
 .login-box {
   padding: 0.5rem 1.5rem;
   width: 27rem;
-  background-color: $full-white;
+  background-color: var(--full-white);
 }

@@ -1,16 +1,16 @@
 .editbox {
   display: block;
 
-  .editbox-edit-field {
+  & .editbox-edit-field {
     display: inline-block;
     margin-right: 0.5rem;
 
-    .textbox-input {
+    & .textbox-input {
       margin: 0;
     }
   }
 
-  .editbox-edit-actions {
+  & .editbox-edit-actions {
     display: inline-block;
   }
 }

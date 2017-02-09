@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getMovie, addLanguageTranlation } from '../../actions';
-import Button from 'components/Button';
 import EditBox from 'components/EditBox';
+import Header from 'components/Header';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
+import NavigationBar from 'components/NavigationBar';
+
+import { Link } from 'react-router';
 
 import styles from 'styles';
 
@@ -26,7 +29,12 @@ class MovieDetails extends Component {
       const imdbUrl = `http://imdb.com/title/${movie.imdbId}`;
 
       return (
-        <div className={styles['movie-details-content']}>
+        <div
+          className={styles['movie-details-content']}
+          style={{
+            backgroundImage: `url(/images/${movie.poster ? movie.poster : 'blank.png'})`,
+          }}
+        >
           <div className={styles['movie-details-image-container']}>
             <AbsoluteMiddle>
               <img
@@ -35,14 +43,12 @@ class MovieDetails extends Component {
               />
             </AbsoluteMiddle>
           </div>
-          <div className={styles['movie-details-content']}>
-            <AbsoluteMiddle>
-              <div>
-                <h1>{movieHeader}</h1>
-                <a href={imdbUrl} target="_blank">{imdbUrl}</a>
-                <div>Original language: {language.name}</div>
-                <div>{translations.length} translations</div>
-              </div>
+          <div className={styles['movie-details-info']}>
+            <AbsoluteMiddle vertical>
+              <h1>{movieHeader}</h1>
+              <a href={imdbUrl} target="_blank">{imdbUrl}</a>
+              <div>Original language: {language.name}</div>
+              <div>{translations.length} translations</div>
             </AbsoluteMiddle>
           </div>
         </div>
@@ -65,7 +71,6 @@ class MovieDetails extends Component {
   }
 
   renderTranslations() {
-    const { movieId } = this.props.routeParams;
     const { translations, countries, languages } = this.props;
 
     let translationsBox = (
@@ -77,7 +82,6 @@ class MovieDetails extends Component {
     if (translations.length > 0) {
       translationsBox = (
         <div>
-          <h2>Translations</h2>
           <table>
             <thead>
               <tr>
@@ -108,27 +112,39 @@ class MovieDetails extends Component {
       );
     }
 
-    return (
-      <div>
-        {translationsBox}
-        <Button
-          text="Add translation"
-          link={`/movies/${movieId}/translation/add`}
-          onClick={this.handleAddTranslationClick}
-        />
-      </div>
-    );
+    return translationsBox;
   }
 
   render() {
+    const { movieId } = this.props.routeParams;
+    const { movie } = this.props;
+
     if (this.props.notFound) {
       return (
         <h1>Movie not found</h1>
       );
     }
 
+    const navBarItems = [
+      {
+        text: 'Movies',
+        href: '/movies',
+      },
+      {
+        text: `${movie.title} (${movie.year})`,
+      },
+      {
+        text: 'Add translation',
+        href: `/movies/${movieId}/translation/add`,
+      },
+    ];
+
     return (
       <div className={styles['movie-details']}>
+        <NavigationBar
+          items={navBarItems}
+          selectedIndex={2}
+        />
         {this.renderMovie()}
         {this.renderTranslations()}
       </div>

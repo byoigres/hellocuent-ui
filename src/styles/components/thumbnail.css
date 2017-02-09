@@ -1,0 +1,31 @@
+.thumbnail-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+
+  & .thumbnail-item {
+    flex: 0 0 20%;
+
+    & .thumbnail-item-detail {
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem;
+
+      &:hover{
+        background-color: var(--faint-black);
+        cursor: pointer;
+      }
+
+      & .thumbnail-item-image {
+        max-height: 15.375rem;
+        flex: 1;
+      }
+
+      & .thumbnail-item-description {
+        padding-top: 0.7rem;
+      }
+    }
+  }
+}

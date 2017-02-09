@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { getMovies } from '../../actions';
 
-import Button from 'components/Button';
+import Header from 'components/Header';
+import NavigationBar from 'components/NavigationBar';
 import styles from 'styles';
 
 class ListMovies extends Component {
@@ -13,9 +14,18 @@ class ListMovies extends Component {
   }
 
   render() {
+    const navBarItems = [
+      {
+        text: 'Movies',
+      },
+      {
+        text: 'Add movie',
+        href: '/movies/add',
+      },
+    ];
     return (
       <div>
-        <h2>Movie List</h2>
+        <NavigationBar items={navBarItems} />
         <div className={styles['movie-list']}>
           {this.props.movies.map((movie) => (
             <div
@@ -34,13 +44,6 @@ class ListMovies extends Component {
               </Link>
             </div>
           ))}
-        </div>
-        <div>
-          <Button
-            text="Add Movie"
-            link="/movies/add"
-            block
-          />
         </div>
       </div>
     );
