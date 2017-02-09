@@ -2,11 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getMovie, addLanguageTranlation } from '../../actions';
 import EditBox from 'components/EditBox';
-import Header from 'components/Header';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
 import NavigationBar from 'components/NavigationBar';
-
-import { Link } from 'react-router';
 
 import styles from 'styles';
 

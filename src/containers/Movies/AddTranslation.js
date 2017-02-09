@@ -9,9 +9,6 @@ import {
   resetErrors,
 } from '../../actions';
 
-import { Link } from 'react-router';
-
-import Header from 'components/Header';
 import TextBox from 'components/TextBox';
 import Select from 'components/Select';
 import Button from 'components/Button';

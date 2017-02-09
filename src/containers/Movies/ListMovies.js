@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { getMovies } from '../../actions';
 
-import Header from 'components/Header';
 import NavigationBar from 'components/NavigationBar';
 import styles from 'styles';
 
