@@ -18,13 +18,9 @@
 @import 'components/button';
 @import 'components/navigationbar';
 @import 'components/textbox';
-/*
 @import 'components/card';
 @import 'components/editbox';
 @import 'components/dropzoneposter';
-*/
 @import 'components/absolutemiddle';
-/*
 @import 'components/modal';
-*/
 @import 'components/login';

@@ -48,43 +48,45 @@ class AddMovie extends Component {
 
     return (
       <div className={styles['add-movie']}>
-        <div>
-          <NavigationBar items={navBarItems} selectedIndex={2} />
-          <TextBox
-            placeholder="Original title"
-            ref="title"
-            error={messages.title}
-          />
-          <TextBox
-            maxLength="4"
-            placeholder="Year"
-            ref="year"
-            error={messages.year}
-          />
-          <TextBox
-            leftText="https://imdb.com/title/"
-            placeholder="Imdb ID"
-            ref="imdbId"
-            error={messages.imdbId}
-          />
-          <Select
-            placeholder="Title language"
-            items={this.props.languages}
-            ref="language"
-            error={messages.languageCode}
-          />
-          <Button
-            text="Add"
-            block
-            onClick={this.handleAddButtonClick}
-          />
+        <NavigationBar items={navBarItems} selectedIndex={2} />
+        <div className={styles['add-movie-container']}>
+          <div className={styles['add-movie-content']}>
+            <TextBox
+              placeholder="Original title"
+              ref="title"
+              error={messages.title}
+            />
+            <TextBox
+              maxLength="4"
+              placeholder="Year"
+              ref="year"
+              error={messages.year}
+            />
+            <TextBox
+              leftText="https://imdb.com/title/"
+              placeholder="Imdb ID"
+              ref="imdbId"
+              error={messages.imdbId}
+            />
+            <Select
+              placeholder="Title language"
+              items={this.props.languages}
+              ref="language"
+              error={messages.languageCode}
+            />
+            <Button
+              text="Add"
+              block
+              onClick={this.handleAddButtonClick}
+            />
+          </div>
+          <AbsoluteMiddle adjustSize={false}>
+            <DropZonePoster
+              text={messages.poster ? messages.poster : 'Add Poster'}
+              ref="poster"
+            />
+          </AbsoluteMiddle>
         </div>
-        <AbsoluteMiddle adjustSize={false}>
-          <DropZonePoster
-            text="Add Poster"
-            ref="poster"
-          />
-        </AbsoluteMiddle>
       </div>
     );
   }

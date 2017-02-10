@@ -93,37 +93,35 @@ class AddTranslation extends Component {
 
     return (
       <div className={styles['add-translation']}>
-        <div>
-          <NavigationBar items={navBarItems} selectedIndex={3} />
-          <TextBox
-            placeholder="Title"
-            ref="title"
-            error={messages.title}
-          />
-          <Select
-            placeholder="Country"
-            items={countryList}
-            onChange={this.handleCountryChange}
-            ref="country"
-            error={messages.country}
-          />
-          <Select
-            placeholder="Language"
-            items={languageList}
-            ref="language"
-            disabled={(this.refs.country && this.refs.country.getValue().length === 0)}
-            error={messages.language}
-          />
-          <TextBox
-            placeholder="Description"
-            ref="description"
-            error={messages.description}
-          />
-          <Button
-            text="Add translation"
-            onClick={this.handleAddTranslationClick}
-          />
-        </div>
+        <NavigationBar items={navBarItems} selectedIndex={3} />
+        <TextBox
+          placeholder="Title"
+          ref="title"
+          error={messages.title}
+        />
+        <Select
+          placeholder="Country"
+          items={countryList}
+          onChange={this.handleCountryChange}
+          ref="country"
+          error={messages.country}
+        />
+        <Select
+          placeholder="Language"
+          items={languageList}
+          ref="language"
+          disabled={(this.refs.country && this.refs.country.getValue().length === 0)}
+          error={messages.language}
+        />
+        <TextBox
+          placeholder="Description"
+          ref="description"
+          error={messages.description}
+        />
+        <Button
+          text="Add translation"
+          onClick={this.handleAddTranslationClick}
+        />
       </div>
     );
   }

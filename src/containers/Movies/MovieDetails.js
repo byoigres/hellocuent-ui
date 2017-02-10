@@ -45,12 +45,10 @@ class MovieDetails extends Component {
             </AbsoluteMiddle>
           </div>
           <div className={styles['movie-details-info']}>
-            <AbsoluteMiddle vertical>
-              <h1>{movieHeader}</h1>
-              <a href={imdbUrl} target="_blank">{imdbUrl}</a>
-              <div>Original language: {language.name}</div>
-              <div>{translations.length} translations</div>
-            </AbsoluteMiddle>
+            <h1>{movieHeader}</h1>
+            <a href={imdbUrl} target="_blank">{imdbUrl}</a>
+            <div>Original language: {language.name}</div>
+            <div>{translations.length} translations</div>
           </div>
         </div>
       );
