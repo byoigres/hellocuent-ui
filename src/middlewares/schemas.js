@@ -1,6 +1,6 @@
 import { Schema, arrayOf } from 'normalizr';
 
-const user = new Schema('users');
+const user = new Schema('users', { idAttribute: 'username' });
 const movie = new Schema('movies');
 const translation = new Schema('translations');
 const languageTranslation = new Schema('languageTranslation');

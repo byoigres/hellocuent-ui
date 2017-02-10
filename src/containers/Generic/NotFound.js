@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import AbsoluteMiddle from 'components/AbsoluteMiddle';
 
 class NotFound extends Component {
   render() {
     return (
-      <h1>NOT FOUND</h1>
+      <AbsoluteMiddle>
+        <h1>404 <small>Not Found</small></h1>
+      </AbsoluteMiddle>
     );
   }
 }

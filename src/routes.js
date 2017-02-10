@@ -11,6 +11,7 @@ import AddMovie from './containers/Movies/AddMovie';
 import ListMovies from './containers/Movies/ListMovies';
 import MovieDetails from './containers/Movies/MovieDetails';
 import AddTranslation from './containers/Movies/AddTranslation';
+import UserProfile from './containers/User/Profile';
 import NotFound from './containers/Generic/NotFound';
 
 const requireAuth = (nextState, replace) => {
@@ -34,8 +35,11 @@ export default (
         <Route path=":movieId" component={MovieDetails} />
         <Route path=":movieId/translation/add" component={AddTranslation} onEnter={requireAuth} />
       </Route>
+      <Route path="user">
+        <Route path=":username" component={UserProfile} />
+      </Route>
     </Route>
-    <Route path="/auth" component={CleanLayout}>
+    <Route path="auth" component={CleanLayout}>
       <Route path="login" component={Login} />
       <Route path="register" component={Register} />
     </Route>
