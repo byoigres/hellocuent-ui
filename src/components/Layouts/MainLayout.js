@@ -5,7 +5,6 @@ import { Link } from 'react-router';
 import Navbar from '../Navbar';
 
 import styles from 'styles';
-// import flexboxgrid from 'flexboxgrid';
 
 class MainLayout extends Component {
   getChildContext() {
