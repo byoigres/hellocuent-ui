@@ -1,14 +1,30 @@
-var Webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var Clean = require('clean-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var DashboardPlugin = require('webpack-dashboard/plugin');
-var path = require('path');
+const Webpack = require('webpack');
 
-var BASE_PATH = __dirname;
-var PROXY_TARGET = 'http://localhost:7001';
+// Webpack Plugins
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Clean = require('clean-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const PostcssImport = require('postcss-import');
+const PostcssNext = require('postcss-cssnext');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const path = require('path');
 
-var webpackConfig = {
+const BASE_PATH = __dirname;
+const PROXY_TARGET = 'http://localhost:7001';
+
+// const IS_DEBUG = process.env.NODE_ENV !== 'production';
+
+const postcssOptions = {
+  plugins: () => [
+    PostcssImport,
+    /* eslint new-cap: 0*/
+    PostcssNext({
+      browsers: ['last 2 versions', '> 5%'],
+    }),
+  ],
+};
+
+const webpackConfig = {
   name: 'front-ui',
   target: 'web',
   context: BASE_PATH,
@@ -16,7 +32,7 @@ var webpackConfig = {
     app: [
       'webpack-dev-server/client',
       'webpack/hot/only-dev-server',
-      './src'
+      './src',
     ],
     vendor: [
       'react',
@@ -25,53 +41,69 @@ var webpackConfig = {
       'redux',
       'react-redux',
       'react-router',
-      'react-router-redux'
-    ]
+      'react-router-redux',
+    ],
   },
   output: {
     path: path.join(BASE_PATH, 'build'),
     publicPath: '/',
     filename: '[name].js',
-    sourceMapFilename: '[name].map.js'
+    sourceMapFilename: '[name].map.js',
   },
   resolve: {
-    modulesDirectories: ['src', 'node_modules'],
-    extensions: ['', '.js', 'json', '.jsx', '.scss', '.css'],
-    alias: {
-      'flexboxgrid': 'flexboxgrid/dist/flexboxgrid.css'
-    }
+    modules: [
+      'node_modules',
+      'src',
+    ],
+    extensions: ['.js', 'json', '.css'],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel'],
-        include: path.join(__dirname, 'src')
+        use: [
+          'react-hot-loader',
+          'babel-loader',
+        ],
+        include: path.join(__dirname, 'src'),
       },
       {
         test: /\.css$/,
-        //loaders: ['style', 'css?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'sass']
-        loaders: ['style', 'css?sourceMap&modules&localIdentName=[local]', 'postcss']
-      }
-    ]
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              localIdentName: '[local]',
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: postcssOptions,
+          },
+        ],
+      },
+    ],
   },
-
   plugins: [
     new DashboardPlugin(),
-    new Webpack.optimize.OccurenceOrderPlugin(),
     new Webpack.HotModuleReplacementPlugin(),
-    new Webpack.NoErrorsPlugin(),
+    // new Webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: './src/template.html',
       filename: 'index.html',
       title: 'Hellocuent',
       hash: false,
-      inject: 'body'
+      inject: 'body',
     }),
     new Webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: Infinity
+      minChunks(module) {
+        // this assumes your vendor imports exist in the node_modules directory
+        return module.context && module.context.indexOf('node_modules') !== -1;
+      },
     }),
     new Clean([path.join(BASE_PATH, 'build')]),
     // new ExtractTextPlugin('[name].[hash].css'),
@@ -94,7 +126,7 @@ var webpackConfig = {
       hash: false,
       reasons: true,
       timings: true,
-      version: false
+      version: false,
     },
     proxy: {
       '/api/*': {
@@ -104,21 +136,22 @@ var webpackConfig = {
       '/static/*': {
         target: PROXY_TARGET,
         secure: false,
-        bypass: function(req, res, proxyOptions) {
-          if (/^\/public\/static\/[A-Za-z0-9\-]+\.css/.test(req.url)) {
+        bypass: function bypass(req, res/* , proxyOptions*/) {
+          if (/^\/public\/static\/[A-Za-z0-9-]+\.css/.test(req.url)) {
             res.writeHead(200, { 'Content-Type': 'text/css' });
             res.write('// This is a fake CSS content... :)');
             res.end();
             return true;
           }
+          return false;
         },
       },
       '/images/*': {
         target: PROXY_TARGET,
-        secure: false
+        secure: false,
       },
-    }
-  }
+    },
+  },
+};
 
-}
 module.exports = webpackConfig;
