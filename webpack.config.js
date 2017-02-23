@@ -8,6 +8,7 @@ const PostcssImport = require('postcss-import');
 const PostcssNext = require('postcss-cssnext');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const path = require('path');
+const vendorDeps = require('./package').dependencies;
 
 const BASE_PATH = __dirname;
 const PROXY_TARGET = 'http://localhost:7001';
@@ -34,15 +35,7 @@ const webpackConfig = {
       'webpack/hot/only-dev-server',
       './src',
     ],
-    vendor: [
-      'react',
-      'react-dom',
-      'react-hot-loader',
-      'redux',
-      'react-redux',
-      'react-router',
-      'react-router-redux',
-    ],
+    vendor: Object.keys(vendorDeps),
   },
   output: {
     path: path.join(BASE_PATH, 'build'),
@@ -76,6 +69,7 @@ const webpackConfig = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
+              modules: true,
               localIdentName: '[local]',
             },
           },
@@ -109,7 +103,6 @@ const webpackConfig = {
     // new ExtractTextPlugin('[name].[hash].css'),
   ],
   devtool: 'eval',
-
   devServer: {
     contentBase: './src',
     historyApiFallback: true,
