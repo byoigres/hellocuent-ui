@@ -48,7 +48,8 @@ const webpackConfig = {
       'node_modules',
     ],
     alias: {
-      styles: 'src/styles',
+      styles: path.resolve(__dirname, './src/styles'),
+      components: path.resolve(__dirname, './src/components'),
     },
     extensions: ['.js', 'json', '.css'],
   },
