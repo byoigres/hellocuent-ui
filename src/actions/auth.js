@@ -1,7 +1,7 @@
-import * as constants from '../constants';
+import { normalize } from 'normalizr';
 import 'isomorphic-fetch';
 import { Schemas } from '../middlewares/schemas';
-import { normalize } from 'normalizr';
+import * as constants from '../constants';
 
 function setToken(user, token) {
   return {

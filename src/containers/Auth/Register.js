@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { register, resetErrors } from '../../actions';
-
 import { Link, browserHistory } from 'react-router';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
 import Button from 'components/Button';
 import TextBox from 'components/TextBox';
 import styles from 'styles';
+
+import { register, resetErrors } from '../../actions';
 
 class Register extends Component {
 
@@ -35,11 +35,11 @@ class Register extends Component {
     e.preventDefault();
 
     this.props.register(
-      this.refs.username.getValue(),
-      this.refs.email.getValue(),
-      this.refs.name.getValue(),
-      this.refs.password.getValue(),
-      this.refs.confirmPassword.getValue()
+      this.username.getValue(),
+      this.email.getValue(),
+      this.name.getValue(),
+      this.password.getValue(),
+      this.confirmPassword.getValue(),
     );
   }
 
@@ -68,29 +68,29 @@ class Register extends Component {
           <TextBox
             placeholder="Username"
             error={messages.username}
-            ref="username"
+            ref={r => this.username = r}
           />
           <TextBox
             placeholder="Email"
             error={messages.email}
-            ref="email"
+            ref={r => this.email = r}
           />
           <TextBox
             placeholder="Name"
             error={messages.email}
-            ref="name"
+            ref={r => this.name = r}
           />
           <TextBox
             placeholder="Password"
             type="password"
             error={messages.password}
-            ref="password"
+            ref={r => this.password = r}
           />
           <TextBox
             placeholder="Confirm Password"
             type="password"
             error={messages.confirmPassword}
-            ref="confirmPassword"
+            ref={r => this.confirmPassword = r}
           />
           <Button
             text="Create Account"
@@ -112,6 +112,11 @@ Register.propTypes = {
   message: PropTypes.string,
   register: PropTypes.func.isRequired,
   resetErrors: PropTypes.func.isRequired,
+};
+
+Register.defaultProps = {
+  messages: {},
+  message: null,
 };
 
 Register.defaultProps = {

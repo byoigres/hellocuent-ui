@@ -15,7 +15,7 @@ class MainLayout extends Component {
 MainLayout.displayName = 'MainLayout';
 
 MainLayout.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.element.isRequired,
 };
 
 MainLayout.contextTypes = {

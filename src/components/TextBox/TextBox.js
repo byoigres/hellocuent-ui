@@ -36,7 +36,7 @@ class TextBox extends Component {
             className={textboxStyles}
             type="text"
             {...props}
-            ref={(input) => this.input = input}
+            ref={input => this.input = input}
             value={text}
           />
         </div>
@@ -51,5 +51,12 @@ TextBox.propTypes = {
   leftText: PropTypes.string,
   error: PropTypes.string,
 };
+
+TextBox.defaultProps = {
+  text: '',
+  leftText: null,
+  error: null,
+};
+
 
 export default TextBox;

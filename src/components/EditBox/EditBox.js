@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import styles from 'styles';
+
 import TextBox from '../TextBox';
 import Button from '../Button';
-
-import styles from 'styles';
 
 class EditBox extends Component {
   constructor(props) {
@@ -73,7 +73,7 @@ class EditBox extends Component {
       <div className={styles.editbox}>
         <div className={styles['editbox-edit-field']}>
           <TextBox
-            ref={(input) => this.editInput = input}
+            ref={input => this.editInput = input}
             error={this.state.error}
           />
         </div>
@@ -104,7 +104,7 @@ EditBox.propTypes = {
   saveText: PropTypes.string,
   cancelText: PropTypes.string,
   text: PropTypes.string,
-  error: PropTypes.string,
+  // error: PropTypes.string,
   loading: PropTypes.bool,
   loadingText: PropTypes.string,
   onEditClick: PropTypes.func,
@@ -116,8 +116,11 @@ EditBox.defaultProps = {
   saveText: 'Save',
   cancelText: 'Cancel',
   text: 'Edit',
+  // error: null,
   loading: false,
   loadingText: 'Loading...',
+  onEditClick: null,
+  onCancelClick: null,
 };
 
 export default EditBox;

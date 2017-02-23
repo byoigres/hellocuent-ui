@@ -5,12 +5,22 @@
       "experimentalObjectRestSpread": true,
     }
   },
+  "env": {
+    "browser": true
+  },
   "rules": {
     "react/prefer-stateless-function": 0,
+    "react/jsx-filename-extension": 0,
+    "react/forbid-prop-types": 0,
     "no-return-assign": 0,
+    "import/extensions": 0,
+    "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": [
       2, {
-        "ignore": ["style", "^components/"]
+        "ignore": [
+          "^styles$",
+          "^components/"
+        ]
       }
     ]
   }

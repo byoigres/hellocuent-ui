@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getMovie, addLanguageTranlation } from '../../actions';
 import EditBox from 'components/EditBox';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
 import NavigationBar from 'components/NavigationBar';
-
 import styles from 'styles';
+
+import { getMovie, addLanguageTranlation } from '../../actions';
 
 class MovieDetails extends Component {
 
@@ -34,8 +34,8 @@ class MovieDetails extends Component {
             style={{
               backgroundImage: `url(/images/${movie.poster ? movie.poster : 'blank.png'})`,
             }}
-          ></div>
-          <div className={styles['background-image-overlay']}></div>
+          />
+          <div className={styles['background-image-overlay']} />
           <div className={styles['movie-details-image-container']}>
             <AbsoluteMiddle>
               <img
@@ -46,7 +46,7 @@ class MovieDetails extends Component {
           </div>
           <div className={styles['movie-details-info']}>
             <h1>{movieHeader}</h1>
-            <a href={imdbUrl} target="_blank">{imdbUrl}</a>
+            <a href={imdbUrl} target="_blank" rel="noopener noreferrer">{imdbUrl}</a>
             <div>Original language: {language.name}</div>
             <div>{translations.length} translations</div>
           </div>
@@ -63,8 +63,8 @@ class MovieDetails extends Component {
         text="Add Translation"
         loading={this.props.loaders.languageTranslation}
         loadingText="Saving..."
-        onSaveClick={(value) => this.saveLanguageTranslation(value, id)}
-        ref={(edit) => this.edit = edit}
+        onSaveClick={value => this.saveLanguageTranslation(value, id)}
+        ref={edit => this.edit = edit}
       />
     );
   }
@@ -92,7 +92,7 @@ class MovieDetails extends Component {
               </tr>
             </thead>
             <tbody>
-              {translations.map((item) => (
+              {translations.map(item => (
                 <tr key={item.id}>
                   <td>{countries[item.country].name}</td>
                   <td>{languages[item.language].name}</td>

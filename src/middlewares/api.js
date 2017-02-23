@@ -35,7 +35,7 @@ function callApi(requestInfo = {
   }
 
   return fetch(fullUrl, options).then(response =>
-      response.json().then(json => ({ json, response }))
+      response.json().then(json => ({ json, response })),
     ).then(({ json, response }) => {
       if (response.headers.has('authorization')) {
         // console.log('Headers', response.headers.get('authorization'));
@@ -59,7 +59,7 @@ function callApi(requestInfo = {
     });
 }
 
-export default (store) => next => action => {
+export default store => next => (action) => {
   const callAPI = action[CALL_API];
 
   if (typeof callAPI === 'undefined') {
@@ -112,6 +112,6 @@ export default (store) => next => action => {
     response => next(actionWith({
       type: failureType,
       error: response.error || 'Something bad happened',
-    }))
+    })),
   );
 };

@@ -46,8 +46,10 @@ const webpackConfig = {
   resolve: {
     modules: [
       'node_modules',
-      'src',
     ],
+    alias: {
+      styles: 'src/styles',
+    },
     extensions: ['.js', 'json', '.css'],
   },
   module: {

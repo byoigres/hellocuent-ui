@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { login, resetErrors } from '../../actions';
-
 import { Link, browserHistory } from 'react-router';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
 import Button from 'components/Button';
 import TextBox from 'components/TextBox';
 import styles from 'styles';
+
+import { login, resetErrors } from '../../actions';
 
 class Login extends Component {
 
@@ -37,8 +37,8 @@ class Login extends Component {
     e.preventDefault();
 
     this.props.login(
-      this.refs.username.getValue(),
-      this.refs.password.getValue()
+      this.username.getValue(),
+      this.password.getValue(),
     );
   }
 
@@ -57,13 +57,13 @@ class Login extends Component {
             <TextBox
               placeholder="Email"
               error={messages.username}
-              ref="username"
+              ref={r => this.username = r}
             />
             <TextBox
               placeholder="Password"
               type="password"
               error={messages.password}
-              ref="password"
+              ref={r => this.password = r}
             />
             <Button
               text="Login"
@@ -88,6 +88,12 @@ Login.propTypes = {
   login: PropTypes.func.isRequired,
   resetErrors: PropTypes.func.isRequired,
 };
+
+Login.defaultProps = {
+  messages: {},
+  message: null,
+};
+
 
 Login.defaultProps = {
   isAuthenticated: false,

@@ -1,5 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import TextBox from 'components/TextBox';
+import Select from 'components/Select';
+import Button from 'components/Button';
+import NavigationBar from 'components/NavigationBar';
+import styles from 'styles';
+
 import {
   getMovie,
   getCountries,
@@ -8,13 +14,6 @@ import {
   initTranslation,
   resetErrors,
 } from '../../actions';
-
-import TextBox from 'components/TextBox';
-import Select from 'components/Select';
-import Button from 'components/Button';
-import NavigationBar from 'components/NavigationBar';
-
-import styles from 'styles';
 
 class AddTranslation extends Component {
 
@@ -52,10 +51,10 @@ class AddTranslation extends Component {
 
     this.props.addTranslation(
       movieId,
-      this.refs.title.getValue(),
-      this.refs.country.getValue(),
-      this.refs.language.getValue(),
-      this.refs.description.getValue()
+      this.title.getValue(),
+      this.country.getValue(),
+      this.language.getValue(),
+      this.description.getValue(),
     );
   }
 
@@ -70,8 +69,8 @@ class AddTranslation extends Component {
 
     let languageList = [];
 
-    if (this.refs.country && this.refs.country.getValue().length > 0) {
-      languageList = countries[this.refs.country.getValue()].languages.map((item) => ({
+    if (this.country && this.country.getValue().length > 0) {
+      languageList = countries[this.country.getValue()].languages.map(item => ({
         id: languages[item].code,
         text: languages[item].name,
       }));
@@ -96,26 +95,26 @@ class AddTranslation extends Component {
         <NavigationBar items={navBarItems} selectedIndex={3} />
         <TextBox
           placeholder="Title"
-          ref="title"
+          ref={r => this.title = r}
           error={messages.title}
         />
         <Select
           placeholder="Country"
           items={countryList}
           onChange={this.handleCountryChange}
-          ref="country"
+          ref={r => this.country = r}
           error={messages.country}
         />
         <Select
           placeholder="Language"
           items={languageList}
-          ref="language"
-          disabled={(this.refs.country && this.refs.country.getValue().length === 0)}
+          ref={r => this.language = r}
+          disabled={(this.country && this.country.getValue().length === 0)}
           error={messages.language}
         />
         <TextBox
           placeholder="Description"
-          ref="description"
+          ref={r => this.description = r}
           error={messages.description}
         />
         <Button

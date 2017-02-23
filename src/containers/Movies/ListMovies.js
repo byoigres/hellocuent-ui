@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { getMovies } from '../../actions';
-
 import NavigationBar from 'components/NavigationBar';
 import styles from 'styles';
+
+import { getMovies } from '../../actions';
 
 class ListMovies extends Component {
 
@@ -26,7 +26,7 @@ class ListMovies extends Component {
       <div>
         <NavigationBar items={navBarItems} />
         <div className={styles['movie-list']}>
-          {this.props.movies.map((movie) => (
+          {this.props.movies.map(movie => (
             <div
               className={styles['movie-list-item']}
               key={movie.id}
@@ -63,7 +63,7 @@ ListMovies.contextTypes = {
 function mapStateToProps(state) {
   let { movies } = state.entities;
 
-  movies = Object.keys(movies).map((item) => movies[item]);
+  movies = Object.keys(movies).map(item => movies[item]);
 
   return {
     movies,

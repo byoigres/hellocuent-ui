@@ -5,12 +5,12 @@ import reducers from './reducers';
 
 const middlewaresCreateStore = compose(
   applyMiddleware(thunk, api),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
+  window.devToolsExtension ? window.devToolsExtension() : f => f,
 )(createStore);
 
-const configureStore = (initialState) => middlewaresCreateStore(
+const configureStore = initialState => middlewaresCreateStore(
   reducers(initialState),
-  initialState
+  initialState,
 );
 
 export default configureStore;

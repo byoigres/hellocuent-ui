@@ -1,7 +1,7 @@
 export * from './auth';
 export * from './movies';
-export * from './countries';
+export { getCountries } from './countries';
 export * from './languages';
 export * from './translations';
-export * from './user';
-export * from './errors';
+export { getUserProfile } from './user';
+export { resetErrors } from './errors';

@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { addMovie, getLanguages, resetErrors } from '../../actions';
-
 import TextBox from 'components/TextBox';
 import Select from 'components/Select';
 import Button from 'components/Button';
 import DropZonePoster from 'components/DropZonePoster';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
 import NavigationBar from 'components/NavigationBar';
-
 import styles from 'styles';
+
+import { addMovie, getLanguages, resetErrors } from '../../actions';
+
 
 class AddMovie extends Component {
 
@@ -25,11 +25,11 @@ class AddMovie extends Component {
 
   handleAddButtonClick() {
     this.props.addMovie(
-      this.refs.title.getValue(),
-      this.refs.year.getValue(),
-      this.refs.imdbId.getValue(),
-      this.refs.language.getValue(),
-      this.refs.poster.getValue()
+      this.title.getValue(),
+      this.year.getValue(),
+      this.imdbId.getValue(),
+      this.language.getValue(),
+      this.poster.getValue(),
     );
   }
 
@@ -53,25 +53,25 @@ class AddMovie extends Component {
           <div className={styles['add-movie-content']}>
             <TextBox
               placeholder="Original title"
-              ref="title"
+              ref={r => this.title = r}
               error={messages.title}
             />
             <TextBox
               maxLength="4"
               placeholder="Year"
-              ref="year"
+              ref={r => this.year = r}
               error={messages.year}
             />
             <TextBox
               leftText="https://imdb.com/title/"
               placeholder="Imdb ID"
-              ref="imdbId"
+              ref={r => this.imdbId = r}
               error={messages.imdbId}
             />
             <Select
               placeholder="Title language"
               items={this.props.languages}
-              ref="language"
+              ref={r => this.language = r}
               error={messages.languageCode}
             />
             <Button
@@ -83,7 +83,7 @@ class AddMovie extends Component {
           <AbsoluteMiddle adjustSize={false}>
             <DropZonePoster
               text={messages.poster ? messages.poster : 'Add Poster'}
-              ref="poster"
+              ref={r => this.poster = r}
             />
           </AbsoluteMiddle>
         </div>
@@ -102,6 +102,10 @@ AddMovie.propTypes = {
   resetErrors: PropTypes.func.isRequired,
 };
 
+AddMovie.defaultProps = {
+  messages: {},
+};
+
 function mapStateToProps(state) {
   const {
     errors: {
@@ -115,7 +119,7 @@ function mapStateToProps(state) {
 
   let languages = [];
 
-  languages = Object.keys(languageList).map((item) => ({
+  languages = Object.keys(languageList).map(item => ({
     id: languageList[item].code,
     text: languageList[item].name,
   }));

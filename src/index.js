@@ -35,5 +35,5 @@ render(
     store={store}
     routes={routes}
   />,
-  rootElement
+  rootElement,
 );

@@ -43,4 +43,10 @@ Button.propTypes = {
   link: PropTypes.string,
 };
 
+Button.defaultProps = {
+  block: false,
+  link: null,
+};
+
+
 export default Button;

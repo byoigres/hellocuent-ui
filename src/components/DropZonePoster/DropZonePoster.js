@@ -36,12 +36,12 @@ class DropZonePoster extends Component {
         {...rest}
       >
         <AbsoluteMiddle>
-        {this.state.poster ?
-          <img
-            src={this.state.poster.preview}
-            alt="Movie Poster"
-            className={styles['dropzone-preview']}
-          /> : <strong>{text}</strong>}
+          {this.state.poster ?
+            <img
+              src={this.state.poster.preview}
+              alt="Movie Poster"
+              className={styles['dropzone-preview']}
+            /> : <strong>{text}</strong>}
         </AbsoluteMiddle>
       </Dropzone>
     );
@@ -51,6 +51,10 @@ class DropZonePoster extends Component {
 DropZonePoster.propTypes = {
   poster: PropTypes.string,
   text: PropTypes.string.isRequired,
+};
+
+DropZonePoster.defaultProps = {
+  poster: null,
 };
 
 export default DropZonePoster;

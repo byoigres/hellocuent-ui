@@ -16,7 +16,7 @@ class Select
     let errorContainer = null;
 
     if (items && items.length > 0) {
-      itemList = items.map((item) => (
+      itemList = items.map(item => (
         <option
           key={item.id}
           data-value={item.id}
@@ -62,6 +62,12 @@ Select.propTypes = {
   placeholder: PropTypes.string,
   items: PropTypes.array,
   error: PropTypes.string,
+};
+
+Select.defaultProps = {
+  placeholder: '',
+  items: [],
+  error: null,
 };
 
 export default Select;

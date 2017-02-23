@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import TextBox from '../TextBox';
-
 import styles from 'styles';
+
+import TextBox from '../TextBox';
 
 class Autocomplete extends Component {
 
@@ -14,6 +14,10 @@ class Autocomplete extends Component {
     this.onTextChange = this.onTextChange.bind(this);
     this.close = this.close.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
+  }
+
+  componentWillReceiveProps(props, next) {
+    console.log('componentWillReceiveProps', props, next);
   }
 
   onTextChange(e) {
@@ -32,8 +36,7 @@ class Autocomplete extends Component {
       selectedItem,
     });
 
-    this.refs.input.value = selectedItem.text;
-    console.log(this.refs.input);
+    this.input.value = selectedItem.text;
     this.close();
   }
 
@@ -43,10 +46,6 @@ class Autocomplete extends Component {
     });
   }
 
-  componentWillReceiveProps(props, next) {
-    console.log('componentWillReceiveProps', props, next);
-  }
-
   render() {
     const { items, ...props } = this.props;
 
@@ -54,7 +53,7 @@ class Autocomplete extends Component {
     let resultBoxStyles = styles['autocomplete-result-box'];
 
     if (items !== undefined && Object.keys(items).length > 0) {
-      itemList = Object.keys(items).map((item) => (
+      itemList = Object.keys(items).map(item => (
         <li
           key={items[item].id}
           data-value={items[item].id}
@@ -74,7 +73,7 @@ class Autocomplete extends Component {
         <TextBox
           {...props}
           onChange={this.onTextChange}
-          ref="input"
+          ref={r => this.input = r}
         />
         <ul className={resultBoxStyles}>
           {itemList}

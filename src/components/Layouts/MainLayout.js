@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-
-import Navbar from '../Navbar';
-
 import styles from 'styles';
+import Navbar from '../Navbar';
 
 class MainLayout extends Component {
   getChildContext() {
@@ -38,9 +36,8 @@ class MainLayout extends Component {
           loginBox={loginBox}
         />
         <div className={styles['main-layout-container']}>
-            {this.props.children}
+          {this.props.children}
         </div>
-
       </div>
     );
   }
@@ -49,7 +46,7 @@ class MainLayout extends Component {
 MainLayout.displayName = 'MainLayout';
 
 MainLayout.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.element.isRequired,
   authentication: PropTypes.object.isRequired,
 };
 

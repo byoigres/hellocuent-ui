@@ -27,7 +27,7 @@ languageTranslation.define({
   language,
 });
 
-export const Schemas = {
+const Schemas = {
   MOVIE: movie,
   MOVIES: arrayOf(movie),
   USER: user,
@@ -40,3 +40,5 @@ export const Schemas = {
   LANGUAGE_TRANSLATION: languageTranslation,
   LANGUAGE_TRANSLATIONS: arrayOf(languageTranslation),
 };
+
+export default Schemas;
