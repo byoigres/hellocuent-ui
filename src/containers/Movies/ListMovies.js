@@ -2,7 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import NavigationBar from 'components/NavigationBar';
+import Modal from 'components/Modal';
 import styles from 'styles';
+import AddMovie from './AddMovie';
+
 
 import { getMovies } from '../../actions';
 
@@ -44,6 +47,9 @@ class ListMovies extends Component {
             </div>
           ))}
         </div>
+        <Modal>
+          <AddMovie />
+        </Modal>
       </div>
     );
   }

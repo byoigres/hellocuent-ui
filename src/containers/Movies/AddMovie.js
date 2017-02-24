@@ -5,7 +5,6 @@ import Select from 'components/Select';
 import Button from 'components/Button';
 import DropZonePoster from 'components/DropZonePoster';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
-import NavigationBar from 'components/NavigationBar';
 import styles from 'styles';
 
 import { addMovie, getLanguages, resetErrors } from '../../actions';
@@ -47,7 +46,6 @@ class AddMovie extends Component {
 
     return (
       <div className={styles['add-movie']}>
-        <NavigationBar items={navBarItems} selectedIndex={2} />
         <div className={styles['add-movie-container']}>
           <div className={styles['add-movie-content']}>
             <TextBox

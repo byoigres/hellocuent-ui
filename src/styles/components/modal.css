@@ -1,21 +1,43 @@
 .modal {
-  // position: absolute;
-  // background-color: $full-white;
+  /*position: absolute;*/
+  /*background-color: $full-white;*/
 
-  .modal-backdrop {
-    position: absolute;
+  & .modal-backdrop {
+    position: fixed;
+    display: flex;
     top: 0;
     left: 0;
     z-index: 101;
     height: 100%;
     width: 100%;
-    background-color: $dark-black;
+    background-color: var(--dark-black);
   }
 
-  .modal-children {
-    position: absolute;
-    left: 50%;
-    background-color: white;
-    z-index: 102;
+& .modal-dialog {
+    position: relative;
+    margin: 30px auto;
+
+    & .modal-header {
+        
+    }
+
+    & .modal-content {
+        /*
+        width: 1000px;
+        height: auto;
+        overflow: auto;
+        margin: auto;
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+        */
+        padding: 0.7rem;
+        background-color: white;
+        z-index: 102;
+
+        & .modal-body {
+            position: relative;
+            margin: 1rem;
+        }
+    }
   }
 }
