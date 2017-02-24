@@ -10,7 +10,6 @@ import styles from 'styles';
 
 import { addMovie, getLanguages, resetErrors } from '../../actions';
 
-
 class AddMovie extends Component {
 
   constructor(props) {

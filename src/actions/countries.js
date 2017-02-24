@@ -2,7 +2,7 @@ import { CALL_API } from '../middlewares/api';
 import { Schemas } from '../middlewares/schemas';
 import * as constants from '../constants';
 
-export default function getCountries() {
+export function getCountries() {
   return {
     [CALL_API]: {
       types: [

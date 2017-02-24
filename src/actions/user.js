@@ -2,7 +2,7 @@ import { CALL_API } from '../middlewares/api';
 import { Schemas } from '../middlewares/schemas';
 import * as constants from '../constants';
 
-export default function getUserProfile(username) {
+export function getUserProfile(username) {
   return {
     [CALL_API]: {
       types: [
