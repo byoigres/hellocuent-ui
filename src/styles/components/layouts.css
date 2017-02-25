@@ -52,7 +52,7 @@
 .add-movie {
   & .add-movie-container {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: flex-start;
 
     & .add-movie-content {
@@ -72,6 +72,10 @@
       & +div {
         margin-left:  1rem;
       }
+    }
+
+    & .add-movie-image {
+
     }
   }
 }

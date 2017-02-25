@@ -4,7 +4,6 @@ import TextBox from 'components/TextBox';
 import Select from 'components/Select';
 import Button from 'components/Button';
 import DropZonePoster from 'components/DropZonePoster';
-import AbsoluteMiddle from 'components/AbsoluteMiddle';
 import styles from 'styles';
 
 import { addMovie, getLanguages, resetErrors } from '../../actions';
@@ -70,12 +69,12 @@ class AddMovie extends Component {
               onClick={this.handleAddButtonClick}
             />
           </div>
-          <AbsoluteMiddle adjustSize={false}>
+          <div className={styles['add-movie-image']}>
             <DropZonePoster
               text={messages.poster ? messages.poster : 'Add Poster'}
               ref={r => this.poster = r}
             />
-          </AbsoluteMiddle>
+          </div>
         </div>
       </div>
     );

@@ -35,14 +35,12 @@ class DropZonePoster extends Component {
         onDrop={this.onDropImage}
         {...rest}
       >
-        <AbsoluteMiddle>
-          {this.state.poster ?
-            <img
-              src={this.state.poster.preview}
-              alt="Movie Poster"
-              className={styles['dropzone-preview']}
-            /> : <strong>{text}</strong>}
-        </AbsoluteMiddle>
+        {this.state.poster ?
+          <img
+            src={this.state.poster.preview}
+            alt="Movie Poster"
+            className={styles['dropzone-preview']}
+          /> : <strong>{text}</strong>}
       </Dropzone>
     );
   }
