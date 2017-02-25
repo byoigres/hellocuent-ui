@@ -47,7 +47,9 @@ class ListMovies extends Component {
             </div>
           ))}
         </div>
-        <Modal>
+        <Modal
+          title="Add movie"
+        >
           <AddMovie />
         </Modal>
       </div>
