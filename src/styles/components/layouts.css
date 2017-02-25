@@ -58,8 +58,19 @@
     & .add-movie-content {
       flex: 0 0 50%;
 
+      & .add-movie-colums {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+
+          & > .select,
+          & > .textbox {
+              width: 50%;
+          }
+      }
+
       & +div {
-        flex: 0 0 50%;
+        margin-left:  1rem;
       }
     }
   }

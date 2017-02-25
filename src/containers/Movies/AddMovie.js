@@ -34,16 +34,6 @@ class AddMovie extends Component {
   render() {
     const { messages } = this.props;
 
-    const navBarItems = [
-      {
-        text: 'Movies',
-        href: '/movies',
-      },
-      {
-        text: 'Add movie',
-      },
-    ];
-
     return (
       <div className={styles['add-movie']}>
         <div className={styles['add-movie-container']}>
@@ -53,27 +43,30 @@ class AddMovie extends Component {
               ref={r => this.title = r}
               error={messages.title}
             />
-            <TextBox
-              maxLength="4"
-              placeholder="Year"
-              ref={r => this.year = r}
-              error={messages.year}
-            />
+            <div className={styles['add-movie-colums']}>
+              <TextBox
+                maxLength="4"
+                placeholder="Year"
+                ref={r => this.year = r}
+                error={messages.year}
+              />
+              <Select
+                placeholder="Title language"
+                items={this.props.languages}
+                ref={r => this.language = r}
+                error={messages.languageCode}
+              />
+            </div>
             <TextBox
               leftText="https://imdb.com/title/"
               placeholder="Imdb ID"
               ref={r => this.imdbId = r}
               error={messages.imdbId}
             />
-            <Select
-              placeholder="Title language"
-              items={this.props.languages}
-              ref={r => this.language = r}
-              error={messages.languageCode}
-            />
             <Button
               text="Add"
               block
+              style={{ display: 'none' }}
               onClick={this.handleAddButtonClick}
             />
           </div>

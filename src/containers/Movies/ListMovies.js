@@ -49,6 +49,7 @@ class ListMovies extends Component {
         </div>
         <Modal
           title="Add movie"
+          okText="Add"
         >
           <AddMovie />
         </Modal>
