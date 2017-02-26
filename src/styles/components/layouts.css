@@ -75,7 +75,7 @@
     }
 
     & .add-movie-image {
-
+        max-width: 22.5rem;
     }
   }
 }
