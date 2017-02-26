@@ -51,7 +51,7 @@ Header.propTypes = {
   text: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
-  ]),
+  ]).isRequired,
   level: PropTypes.number,
   subtext: PropTypes.oneOfType([
     PropTypes.string,
@@ -61,6 +61,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   level: 1,
+  subtext: null,
 };
 
 export default Header;
