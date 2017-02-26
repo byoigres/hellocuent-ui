@@ -50,6 +50,7 @@ class ListMovies extends Component {
         <Modal
           title="Add movie"
           okText="Add"
+          ref={r => this.modal = r}
         >
           <AddMovie />
         </Modal>

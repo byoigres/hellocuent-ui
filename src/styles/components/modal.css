@@ -26,6 +26,7 @@
             font-weight: bold;
             padding: 0.6rem 1rem;
             border-bottom: 1px solid var(--light-black);
+            text-transform: uppercase;;
         }
 
         & .modal-body {

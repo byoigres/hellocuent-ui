@@ -13,7 +13,7 @@ const NavigationBar = ({ items, separator, selectedIndex }) => (
         }
       >
         {
-          item.href ? <Link to={item.href}>{item.text}</Link> : item.text
+          item.href ? <Link to={item.href} onClick={item.onClick}>{item.text}</Link> : item.text
         }
         {' '}
         {
