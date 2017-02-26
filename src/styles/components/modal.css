@@ -14,10 +14,11 @@
 
 & .modal-dialog {
     position: relative;
-    margin: 30px auto;
+    margin: 2rem auto;
 
     & .modal-content {
         padding: 0.7rem;
+        margin-bottom: 2rem;
         background-color: white;
         z-index: 102;
 

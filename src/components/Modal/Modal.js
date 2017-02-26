@@ -39,6 +39,7 @@ class Modal extends Component {
                 />
                 <Button
                   text={okText}
+                  primary
                 />
               </div>
             </div>
