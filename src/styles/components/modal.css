@@ -8,6 +8,7 @@
     z-index: 101;
     height: 100%;
     width: 100%;
+    overflow: scroll;
     background-color: var(--dark-black);
   }
 
