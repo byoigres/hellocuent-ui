@@ -5,11 +5,15 @@ import styles from 'styles';
 
 class Button extends Component {
   render() {
-    const { text, link, block, ...props } = this.props;
+    const { text, link, block, primary, ...props } = this.props;
     let buttonStyles = styles.button;
 
     if (block) {
       buttonStyles = `${buttonStyles} ${styles['button-block']}`;
+    }
+
+    if (primary) {
+      buttonStyles = `${buttonStyles} ${styles.primary}`;
     }
 
     let component = (
@@ -40,11 +44,13 @@ class Button extends Component {
 Button.propTypes = {
   text: PropTypes.string.isRequired,
   block: PropTypes.bool,
+  primary: PropTypes.bool,
   link: PropTypes.string,
 };
 
 Button.defaultProps = {
   block: false,
+  primary: false,
   link: null,
 };
 
