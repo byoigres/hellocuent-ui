@@ -15,6 +15,18 @@
       border-bottom-color: var(--primary-color-1);
       outline: none;
 
+      &:focus {
+          border-top-style: dashed;
+          border-top-width: 0.01rem;
+          border-top-color: var(--primary-color-1);
+          border-left-style: dashed;
+          border-left-width: 0.01rem;
+          border-left-color: var(--primary-color-1);
+          border-right-style: dashed;
+          border-right-width: 0.01rem;
+          border-right-color: var(--primary-color-1);
+      }
+
       & .select-item-placeholder {
         color: var(--light-black);
       }
