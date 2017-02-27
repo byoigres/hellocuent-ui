@@ -32,25 +32,6 @@ export function getMovie(id) {
   };
 }
 
-
-export function searchOmdbMovie(criteria) {
-  return {
-    [CALL_API]: {
-      types: [
-        constants.SEARCH_OMDB_MOVIE_REQUEST,
-        constants.SEARCH_OMDB_MOVIE_SUCCESS,
-        constants.SEARCH_OMDB_MOVIE_FAILURE,
-      ],
-      endpoint: 'api/movies/omdbapi',
-      method: 'POST',
-      body: {
-        criteria,
-      },
-      schema: Schemas.OMDBMOVIE,
-    },
-  };
-}
-
 export function addMovie(title, year, imdbId, languageCode, poster) {
   return {
     [CALL_API]: {
@@ -72,19 +53,15 @@ export function addMovie(title, year, imdbId, languageCode, poster) {
     },
   };
 }
-/*
-export function getLanguages() {
+
+export function openAddMovieModal() {
   return {
-    [CALL_API]: {
-      types: [
-        constants.LANGUAGE_REQUEST,
-        constants.LANGUAGE_SUCCESS,
-        constants.LANGUAGE_FAILURE,
-      ],
-      endpoint: 'api/languages',
-      method: 'GET',
-      schema: Schemas.LANGUAGES,
-    },
+    type: constants.OPEN_ADD_MOVIE_MODAL,
   };
 }
-*/
+
+export function closeAddMovieModal() {
+  return {
+    type: constants.CLOSE_ADD_MOVIE_MODAL,
+  };
+}

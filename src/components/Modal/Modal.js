@@ -14,22 +14,20 @@ class Modal extends Component {
     body.style.overflow = 'auto';
   }
 
-  display() {
-    this.props.display = true;
-  }
-
   render() {
     const {
       children,
       title,
       cancelText,
       okText,
-      display,
+      isOpen,
+      onCancel,
+      onSuccess,
     } = this.props;
 
     const body = document.querySelector('body');
 
-    if (display) {
+    if (isOpen) {
       body.style.overflow = 'hidden';
 
       return (
@@ -46,10 +44,12 @@ class Modal extends Component {
                 <div className={styles['modal-actions']}>
                   <Button
                     text={cancelText}
+                    onClick={onCancel}
                   />
                   <Button
                     text={okText}
                     primary
+                    onClick={onSuccess}
                   />
                 </div>
               </div>
@@ -70,14 +70,16 @@ Modal.propTypes = {
   title: PropTypes.string,
   cancelText: PropTypes.string,
   okText: PropTypes.string,
-  display: PropTypes.bool,
+  isOpen: PropTypes.bool,
+  onCancel: PropTypes.func,
+  onSuccess: PropTypes.func,
 };
 
 Modal.defaultProps = {
   title: null,
   cancelText: 'Cancel',
   okText: 'OK',
-  display: false,
+  isOpen: false,
 };
 
 export default Modal;

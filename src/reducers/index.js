@@ -6,6 +6,7 @@ import errors from './errors';
 import loaders from './loaders';
 import translations from './translations';
 import authentication from './authentication';
+import movies from './movies';
 
 export default function reducers() {
   return combineReducers({
@@ -15,5 +16,6 @@ export default function reducers() {
     loaders,
     translations,
     authentication,
+    movies,
   });
 }
