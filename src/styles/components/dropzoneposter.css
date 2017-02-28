@@ -13,4 +13,10 @@
     max-width: 100%;
     display: block;
   }
+
+  & .dropzone-text {
+      margin: 5rem 0;
+      font-size: 0.8rem;
+      display: block;
+  }
 }

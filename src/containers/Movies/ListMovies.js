@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import NavigationBar from 'components/NavigationBar';
 import Modal from 'components/Modal';
-import Button from 'components/Button';
 import styles from 'styles';
 import AddMovie from './AddMovie';
 
@@ -12,6 +11,7 @@ import {
   getMovies,
   openAddMovieModal,
   closeAddMovieModal,
+  requestAddMovie,
 } from '../../actions';
 
 class ListMovies extends Component {
@@ -20,6 +20,7 @@ class ListMovies extends Component {
     super(props);
     this.displayAddMovieModal = this.displayAddMovieModal.bind(this);
     this.onCancelAddMovieModal = this.onCancelAddMovieModal.bind(this);
+    this.onAddMovie = this.onAddMovie.bind(this);
   }
 
   componentWillMount() {
@@ -28,6 +29,10 @@ class ListMovies extends Component {
 
   onCancelAddMovieModal() {
     this.props.closeAddMovieModal();
+  }
+
+  onAddMovie() {
+    this.props.requestAddMovie();
   }
 
   displayAddMovieModal() {
@@ -43,13 +48,13 @@ class ListMovies extends Component {
       },
       {
         text: 'Add movie',
-        href: '/movies/add',
+        href: '#',
+        onClick: this.displayAddMovieModal,
       },
     ];
     return (
       <div>
         <NavigationBar items={navBarItems} />
-        <Button text="Add Movie" onClick={this.displayAddMovieModal} />
         <div className={styles['movie-list']}>
           {this.props.movies.map(movie => (
             <div
@@ -75,6 +80,7 @@ class ListMovies extends Component {
           isOpen={isModalOpen}
           ref={r => this.modal = r}
           onCancel={this.onCancelAddMovieModal}
+          onSuccess={this.onAddMovie}
         >
           <AddMovie />
         </Modal>
@@ -91,6 +97,7 @@ ListMovies.propTypes = {
   getMovies: PropTypes.func.isRequired,
   openAddMovieModal: PropTypes.func.isRequired,
   closeAddMovieModal: PropTypes.func.isRequired,
+  requestAddMovie: PropTypes.func.isRequired,
 };
 
 ListMovies.contextTypes = {
@@ -113,4 +120,5 @@ export default connect(mapStateToProps, {
   getMovies,
   openAddMovieModal,
   closeAddMovieModal,
+  requestAddMovie,
 })(ListMovies);

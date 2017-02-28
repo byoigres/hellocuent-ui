@@ -15,7 +15,7 @@ class TextBox extends Component {
 
     if (leftText) {
       leftContainer = (
-        <span className={styles['left-textbox-content']}>{leftText}</span>
+        <span className={`${styles['left-textbox-content']}${error ? ` ${styles['textbox-input-error']}` : ''}`}>{leftText}</span>
       );
 
       textboxStyles = `${textboxStyles} ${styles['textbox-input-with-left-content']}`;
@@ -24,7 +24,7 @@ class TextBox extends Component {
     if (error) {
       textboxStyles = `${textboxStyles} ${styles['textbox-input-error']}`;
       errorContainer = (
-        <div className={styles['textbox-error']}>{error}</div>
+        <span className={styles['textbox-error']}>{error}</span>
       );
     }
 

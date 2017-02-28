@@ -6,7 +6,7 @@ class Select
  extends Component {
 
   getValue() {
-    return this.refs.select.value;
+    return this.select.value;
   }
 
   render() {
@@ -14,6 +14,7 @@ class Select
 
     let itemList = null;
     let errorContainer = null;
+    let selectStyles = styles['select-element'];
 
     if (items && items.length > 0) {
       itemList = items.map(item => (
@@ -28,8 +29,9 @@ class Select
     }
 
     if (error) {
+      selectStyles = `${selectStyles} ${styles['select-input-error']}`;
       errorContainer = (
-        <div className={styles['select-error']}>{error}</div>
+        <span className={styles['select-error']}>{error}</span>
       );
     }
 
@@ -37,9 +39,9 @@ class Select
       <div className={styles.select}>
         <div className={styles['select-container']}>
           <select
-            className={styles['select-element']}
+            className={selectStyles}
             {...props}
-            ref="select"
+            ref={r => this.select = r}
             defaultValue=""
           >
             <option

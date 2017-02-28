@@ -20,6 +20,12 @@ class AddMovie extends Component {
     this.props.getLanguages();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.isAdding && nextProps.isAdding) {
+      this.handleAddButtonClick();
+    }
+  }
+
   handleAddButtonClick() {
     this.props.addMovie(
       this.title.getValue(),
@@ -86,6 +92,7 @@ AddMovie.displayName = 'AddMovie';
 AddMovie.propTypes = {
   languages: PropTypes.array.isRequired,
   messages: PropTypes.object,
+  isAdding: PropTypes.bool.isRequired,
   addMovie: PropTypes.func.isRequired,
   getLanguages: PropTypes.func.isRequired,
   resetErrors: PropTypes.func.isRequired,
@@ -104,6 +111,9 @@ function mapStateToProps(state) {
     entities: {
       languages: languageList,
     },
+    movies: {
+      isAdding,
+    },
   } = state;
 
   let languages = [];
@@ -117,6 +127,7 @@ function mapStateToProps(state) {
     languages,
     message,
     messages,
+    isAdding,
   };
 }
 

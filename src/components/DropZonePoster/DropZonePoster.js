@@ -40,7 +40,7 @@ class DropZonePoster extends Component {
             src={this.state.poster.preview}
             alt="Movie Poster"
             className={styles['dropzone-preview']}
-          /> : <strong>{text}</strong>}
+          /> : <strong className={styles['dropzone-text']}>{text}</strong>}
       </Dropzone>
     );
   }

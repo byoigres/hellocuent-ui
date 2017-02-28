@@ -32,6 +32,12 @@ export function getMovie(id) {
   };
 }
 
+export function requestAddMovie() {
+  return {
+    type: constants.ADD_MOVIE,
+  };
+}
+
 export function addMovie(title, year, imdbId, languageCode, poster) {
   return {
     [CALL_API]: {

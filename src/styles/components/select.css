@@ -1,4 +1,6 @@
 .select {
+  margin: 0.5rem 0;
+
   & .select-container {
     display: flex;
     flex-direction: row;
@@ -7,13 +9,17 @@
       flex: 1;
       background-color: var(--full-white);
       padding: 0 0.5rem;
-      margin: 0.5rem 0;
       height: var(--input-height);
       border: none;
       border-bottom-style: solid;
       border-bottom-width: 0.15rem;
       border-bottom-color: var(--primary-color-1);
       outline: none;
+
+      &.select-input-error {
+        color: var(--error-color);
+        border-bottom-color: var(--error-color);
+      }
 
       &:focus {
           border-top-style: dashed;
@@ -44,7 +50,7 @@
   }
 
   & .select-error {
-    font-size: 0.8rem;
+    font-size: var(--text-error-size);
     color: var(--error-color);
   }
 }
