@@ -37,7 +37,7 @@ class TextBox extends Component {
             type="text"
             {...props}
             ref={input => this.input = input}
-            value={text}
+            defaultValue={text}
           />
         </div>
         {errorContainer}
