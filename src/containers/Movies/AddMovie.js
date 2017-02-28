@@ -77,7 +77,8 @@ class AddMovie extends Component {
           </div>
           <div className={styles['add-movie-image']}>
             <DropZonePoster
-              text={messages.poster ? messages.poster : 'Add Poster'}
+              text="Add Poster"
+              error={messages.poster}
               ref={r => this.poster = r}
             />
           </div>

@@ -17,10 +17,13 @@
       border-bottom-color: var(--primary-color-1);
       outline: none;
 
-
       &.textbox-input-error {
         color: var(--error-color);
         border-bottom-color: var(--error-color);
+
+        &::placeholder {
+            color: var(--error-color);
+        }
       }
     }
 
