@@ -2,16 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import NavigationBar from 'components/NavigationBar';
-import Modal from 'components/Modal';
 import styles from 'styles';
 import AddMovie from './AddMovie';
-
-
 import {
   getMovies,
   openAddMovieModal,
-  closeAddMovieModal,
-  requestAddMovie,
 } from '../../actions';
 
 class ListMovies extends Component {
@@ -19,23 +14,14 @@ class ListMovies extends Component {
   constructor(props) {
     super(props);
     this.displayAddMovieModal = this.displayAddMovieModal.bind(this);
-    this.onCancelAddMovieModal = this.onCancelAddMovieModal.bind(this);
-    this.onAddMovie = this.onAddMovie.bind(this);
   }
 
   componentWillMount() {
     this.props.getMovies();
   }
 
-  onCancelAddMovieModal() {
-    this.props.closeAddMovieModal();
-  }
-
-  onAddMovie() {
-    this.props.requestAddMovie();
-  }
-
-  displayAddMovieModal() {
+  displayAddMovieModal(e) {
+    e.preventDefault();
     this.props.openAddMovieModal();
   }
 
@@ -74,16 +60,7 @@ class ListMovies extends Component {
             </div>
           ))}
         </div>
-        <Modal
-          title="Add movie"
-          okText="Add"
-          isOpen={isModalOpen}
-          ref={r => this.modal = r}
-          onCancel={this.onCancelAddMovieModal}
-          onSuccess={this.onAddMovie}
-        >
-          <AddMovie />
-        </Modal>
+        <AddMovie isModalOpen={isModalOpen} />
       </div>
     );
   }
@@ -96,8 +73,6 @@ ListMovies.propTypes = {
   isModalOpen: PropTypes.bool.isRequired,
   getMovies: PropTypes.func.isRequired,
   openAddMovieModal: PropTypes.func.isRequired,
-  closeAddMovieModal: PropTypes.func.isRequired,
-  requestAddMovie: PropTypes.func.isRequired,
 };
 
 ListMovies.contextTypes = {
@@ -119,6 +94,4 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   getMovies,
   openAddMovieModal,
-  closeAddMovieModal,
-  requestAddMovie,
 })(ListMovies);

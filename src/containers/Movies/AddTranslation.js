@@ -1,9 +1,10 @@
+ /* eslint react/require-default-props: 0 */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TextBox from 'components/TextBox';
 import Select from 'components/Select';
-import Button from 'components/Button';
-import NavigationBar from 'components/NavigationBar';
+import Header from 'components/Header';
+import Modal from 'components/Modal';
 import styles from 'styles';
 
 import {
@@ -13,24 +14,27 @@ import {
   addTranslation,
   initTranslation,
   resetErrors,
+  closeAddTranslationModal,
 } from '../../actions';
 
 class AddTranslation extends Component {
 
   constructor(props) {
     super(props);
-    this.handleAddTranslationClick = this.handleAddTranslationClick.bind(this);
+    this.onCancelClick = this.onCancelClick.bind(this);
+    this.onAddClick = this.onAddClick.bind(this);
     this.handleCountryChange = this.handleCountryChange.bind(this);
   }
 
   componentWillMount() {
-    const { movieId } = this.props.routeParams;
+    const { movieId } = this.props;
     this.props.initTranslation();
     this.props.resetErrors();
     this.props.getMovie(movieId);
     this.props.getCountries();
   }
 
+  /*
   componentWillReceiveProps(nextProps, context) {
     const { redirect } = nextProps;
 
@@ -40,14 +44,15 @@ class AddTranslation extends Component {
 
     return true;
   }
+  */
 
-  handleCountryChange(e) {
-    this.props.getLanguagesByCountry(e.target.value);
+  onCancelClick() {
+    this.props.closeAddTranslationModal();
   }
 
-  handleAddTranslationClick(e) {
+  onAddClick(e) {
     e.preventDefault();
-    const { movieId } = this.props.routeParams;
+    const { movieId } = this.props;
 
     this.props.addTranslation(
       movieId,
@@ -58,9 +63,18 @@ class AddTranslation extends Component {
     );
   }
 
+  handleCountryChange(e) {
+    this.props.getLanguagesByCountry(e.target.value);
+  }
+
   render() {
-    const { title, countries, languages, messages } = this.props;
-    const { movieId } = this.props.routeParams;
+    const {
+      title,
+      countries,
+      languages,
+      messages,
+      isModalOpen,
+    } = this.props;
 
     const countryList = Object.keys(countries).map(item => ({
       id: countries[item].code,
@@ -76,52 +90,48 @@ class AddTranslation extends Component {
       }));
     }
 
-    const navBarItems = [
-      {
-        text: 'Movies',
-        href: '/movies',
-      },
-      {
-        text: title,
-        href: `/movies/${movieId}`,
-      },
-      {
-        text: 'Add translation',
-      },
-    ];
-
     return (
-      <div className={styles['add-translation']}>
-        <NavigationBar items={navBarItems} selectedIndex={3} />
-        <TextBox
-          placeholder="Title"
-          ref={r => this.title = r}
-          error={messages.title}
-        />
-        <Select
-          placeholder="Country"
-          items={countryList}
-          onChange={this.handleCountryChange}
-          ref={r => this.country = r}
-          error={messages.country}
-        />
-        <Select
-          placeholder="Language"
-          items={languageList}
-          ref={r => this.language = r}
-          disabled={(this.country && this.country.getValue().length === 0)}
-          error={messages.language}
-        />
-        <TextBox
-          placeholder="Description"
-          ref={r => this.description = r}
-          error={messages.description}
-        />
-        <Button
-          text="Add translation"
-          onClick={this.handleAddTranslationClick}
-        />
-      </div>
+      <Modal
+        title="Add Translation"
+        cancelText="Back"
+        successText="Add"
+        onCancel={this.onCancelClick}
+        onSuccess={this.onAddClick}
+        ref={r => this.modal = r}
+        isOpen={isModalOpen}
+      >
+        <div className={styles['add-translation']}>
+          <Header
+            text={title}
+            isTextCentered
+            level={2}
+          />
+          <TextBox
+            placeholder="Title"
+            ref={r => this.title = r}
+            error={messages.title}
+          />
+          <Select
+            placeholder="Country"
+            items={countryList}
+            onChange={this.handleCountryChange}
+            ref={r => this.country = r}
+            error={messages.country}
+          />
+          <Select
+            placeholder="Language"
+            items={languageList}
+            ref={r => this.language = r}
+            disabled={(this.country && this.country.getValue().length === 0)}
+            error={messages.language}
+          />
+          <TextBox
+            placeholder="Description"
+            ref={r => this.description = r}
+            error={messages.description}
+          />
+        </div>
+      </Modal>
     );
   }
 }
@@ -129,6 +139,7 @@ class AddTranslation extends Component {
 AddTranslation.displayName = 'AddTranslation';
 
 AddTranslation.propTypes = {
+  movieId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   countries: PropTypes.shape({
     id: PropTypes.string,
@@ -139,24 +150,24 @@ AddTranslation.propTypes = {
     text: PropTypes.string,
   }),
   messages: PropTypes.object,
-  redirect: PropTypes.string,
+  // redirect: PropTypes.string,
+  isModalOpen: PropTypes.bool,
   getMovie: PropTypes.func.isRequired,
   getCountries: PropTypes.func.isRequired,
   getLanguagesByCountry: PropTypes.func.isRequired,
   addTranslation: PropTypes.func.isRequired,
-  routeParams: PropTypes.object.isRequired,
   initTranslation: PropTypes.func.isRequired,
   resetErrors: PropTypes.func.isRequired,
+  closeAddTranslationModal: PropTypes.func.isRequired,
 };
 
-AddTranslation.contextTypes = {
-  store: PropTypes.object.isRequired,
-  router: PropTypes.object.isRequired,
+AddTranslation.defaultProps = {
+  isModalOpen: false,
 };
 
 
 function mapStateToProps(state, props) {
-  const { movieId } = props.routeParams;
+  const { movieId } = props; /* .routeParams*/
   const {
     translations: {
       registered,
@@ -196,4 +207,5 @@ export default connect(mapStateToProps, {
   addTranslation,
   initTranslation,
   resetErrors,
+  closeAddTranslationModal,
 })(AddTranslation);

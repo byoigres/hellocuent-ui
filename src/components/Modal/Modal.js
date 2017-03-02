@@ -19,7 +19,7 @@ class Modal extends Component {
       children,
       title,
       cancelText,
-      okText,
+      successText,
       isOpen,
       onCancel,
       onSuccess,
@@ -47,7 +47,7 @@ class Modal extends Component {
                     onClick={onCancel}
                   />
                   <Button
-                    text={okText}
+                    text={successText}
                     primary
                     onClick={onSuccess}
                   />
@@ -69,7 +69,7 @@ Modal.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
   cancelText: PropTypes.string,
-  okText: PropTypes.string,
+  successText: PropTypes.string,
   isOpen: PropTypes.bool,
   onCancel: PropTypes.func,
   onSuccess: PropTypes.func,
@@ -78,8 +78,10 @@ Modal.propTypes = {
 Modal.defaultProps = {
   title: null,
   cancelText: 'Cancel',
-  okText: 'OK',
+  successText: 'OK',
   isOpen: false,
+  onCancel: null,
+  onSuccess: null,
 };
 
 export default Modal;

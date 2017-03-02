@@ -1,22 +1,34 @@
+ /* eslint react/require-default-props: 0 */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import EditBox from 'components/EditBox';
 import AbsoluteMiddle from 'components/AbsoluteMiddle';
 import NavigationBar from 'components/NavigationBar';
 import styles from 'styles';
+import AddTranslation from './AddTranslation';
 
-import { getMovie, addLanguageTranlation } from '../../actions';
+import {
+  getMovie,
+  addLanguageTranlation,
+  openAddTranslationModal,
+} from '../../actions';
 
 class MovieDetails extends Component {
 
   componentWillMount() {
     const { movieId } = this.props.routeParams;
     this.saveLanguageTranslation = this.saveLanguageTranslation.bind(this);
+    this.displayAddTranslationModal = this.displayAddTranslationModal.bind(this);
     this.props.getMovie(movieId);
   }
 
   saveLanguageTranslation(title, translationId) {
     this.props.addLanguageTranlation(translationId, title);
+  }
+
+  displayAddTranslationModal(e) {
+    e.preventDefault();
+    this.props.openAddTranslationModal();
   }
 
   renderMovie() {
@@ -70,7 +82,11 @@ class MovieDetails extends Component {
   }
 
   renderTranslations() {
-    const { translations, countries, languages } = this.props;
+    const {
+      translations,
+      countries,
+      languages,
+    } = this.props;
 
     let translationsBox = (
       <div>
@@ -116,7 +132,10 @@ class MovieDetails extends Component {
 
   render() {
     const { movieId } = this.props.routeParams;
-    const { movie } = this.props;
+    const {
+      movie,
+      isModalOpen,
+    } = this.props;
 
     if (this.props.notFound) {
       return (
@@ -134,7 +153,8 @@ class MovieDetails extends Component {
       },
       {
         text: 'Add translation',
-        href: `/movies/${movieId}/translation/add`,
+        href: '#',
+        onClick: this.displayAddTranslationModal,
       },
     ];
 
@@ -146,6 +166,10 @@ class MovieDetails extends Component {
         />
         {this.renderMovie()}
         {this.renderTranslations()}
+        <AddTranslation
+          movieId={movieId}
+          isModalOpen={isModalOpen}
+        />
       </div>
     );
   }
@@ -178,6 +202,8 @@ MovieDetails.propTypes = {
   loaders: PropTypes.object.isRequired,
   notFound: PropTypes.bool.isRequired,
   routeParams: PropTypes.object.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
+  openAddTranslationModal: PropTypes.func.isRequired,
   getMovie: PropTypes.func.isRequired,
   addLanguageTranlation: PropTypes.func.isRequired,
 };
@@ -192,6 +218,7 @@ function mapStateToProps(state, props) {
     languageTranslation,
   } = state.entities;
   const { loaders } = state;
+  const { isModalOpen } = state.translations;
 
   const movie = movies[movieId] || { translations: [] };
 
@@ -220,10 +247,12 @@ function mapStateToProps(state, props) {
     translations: movieTranslations,
     notFound: Object.keys(movies).length === 0,
     loaders,
+    isModalOpen,
   };
 }
 
 export default connect(mapStateToProps, {
   getMovie,
   addLanguageTranlation,
+  openAddTranslationModal,
 })(MovieDetails);

@@ -1,6 +1,7 @@
 .header {
-  /*
-  color: var(--primary-color-1);
-  */
-  margin: 1rem 0;
+  margin: 0.5rem 0;
+
+  &.header-text-centered {
+      text-align: center;
+  }
 }

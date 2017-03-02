@@ -67,3 +67,15 @@ export function addLanguageTranlation(translationId, title) {
     },
   };
 }
+
+export function openAddTranslationModal() {
+  return {
+    type: constants.OPEN_ADD_TRANSLATION_MODAL,
+  };
+}
+
+export function closeAddTranslationModal() {
+  return {
+    type: constants.CLOSE_ADD_TRANSLATION_MODAL,
+  };
+}

@@ -14,10 +14,6 @@ const movies = (state = initialState, action) => {
     });
   } else if (type === constants.CLOSE_ADD_MOVIE_MODAL) {
     return initialState;
-  } else if (type === constants.ADD_MOVIE) {
-    return Object.assign({}, state, {
-      isAdding: true,
-    });
   }
 
   return state;

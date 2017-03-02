@@ -2,17 +2,23 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TextBox from 'components/TextBox';
 import Select from 'components/Select';
-import Button from 'components/Button';
+import Modal from 'components/Modal';
 import DropZonePoster from 'components/DropZonePoster';
 import styles from 'styles';
 
-import { addMovie, getLanguages, resetErrors } from '../../actions';
+import {
+  addMovie,
+  getLanguages,
+  resetErrors,
+  closeAddMovieModal,
+} from '../../actions';
 
 class AddMovie extends Component {
 
   constructor(props) {
     super(props);
-    this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
+    this.onCancelClick = this.onCancelClick.bind(this);
+    this.onAddClick = this.onAddClick.bind(this);
   }
 
   componentWillMount() {
@@ -20,13 +26,11 @@ class AddMovie extends Component {
     this.props.getLanguages();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.isAdding && nextProps.isAdding) {
-      this.handleAddButtonClick();
-    }
+  onCancelClick() {
+    this.props.closeAddMovieModal();
   }
 
-  handleAddButtonClick() {
+  onAddClick() {
     this.props.addMovie(
       this.title.getValue(),
       this.year.getValue(),
@@ -37,53 +41,59 @@ class AddMovie extends Component {
   }
 
   render() {
-    const { messages } = this.props;
+    const {
+      messages,
+      isModalOpen,
+    } = this.props;
 
     return (
-      <div className={styles['add-movie']}>
-        <div className={styles['add-movie-container']}>
-          <div className={styles['add-movie-content']}>
-            <TextBox
-              placeholder="Original title"
-              ref={r => this.title = r}
-              error={messages.title}
-            />
-            <div className={styles['add-movie-colums']}>
+      <Modal
+        title="Add movie"
+        successText="Add"
+        isOpen={isModalOpen}
+        onCancel={this.onCancelClick}
+        onSuccess={this.onAddClick}
+        ref={r => this.modal = r}
+      >
+        <div className={styles['add-movie']}>
+          <div className={styles['add-movie-container']}>
+            <div className={styles['add-movie-content']}>
               <TextBox
-                maxLength="4"
-                placeholder="Year"
-                ref={r => this.year = r}
-                error={messages.year}
+                placeholder="Original title"
+                ref={r => this.title = r}
+                error={messages.title}
               />
-              <Select
-                placeholder="Title language"
-                items={this.props.languages}
-                ref={r => this.language = r}
-                error={messages.languageCode}
+              <div className={styles['add-movie-colums']}>
+                <TextBox
+                  maxLength="4"
+                  placeholder="Year"
+                  ref={r => this.year = r}
+                  error={messages.year}
+                />
+                <Select
+                  placeholder="Title language"
+                  items={this.props.languages}
+                  ref={r => this.language = r}
+                  error={messages.languageCode}
+                />
+              </div>
+              <TextBox
+                leftText="https://imdb.com/title/"
+                placeholder="Imdb ID"
+                ref={r => this.imdbId = r}
+                error={messages.imdbId}
               />
             </div>
-            <TextBox
-              leftText="https://imdb.com/title/"
-              placeholder="Imdb ID"
-              ref={r => this.imdbId = r}
-              error={messages.imdbId}
-            />
-            <Button
-              text="Add"
-              block
-              style={{ display: 'none' }}
-              onClick={this.handleAddButtonClick}
-            />
-          </div>
-          <div className={styles['add-movie-image']}>
-            <DropZonePoster
-              text="Add Poster"
-              error={messages.poster}
-              ref={r => this.poster = r}
-            />
+            <div className={styles['add-movie-image']}>
+              <DropZonePoster
+                text="Add Poster"
+                error={messages.poster}
+                ref={r => this.poster = r}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </Modal>
     );
   }
 }
@@ -93,14 +103,16 @@ AddMovie.displayName = 'AddMovie';
 AddMovie.propTypes = {
   languages: PropTypes.array.isRequired,
   messages: PropTypes.object,
-  isAdding: PropTypes.bool.isRequired,
+  isModalOpen: PropTypes.bool,
   addMovie: PropTypes.func.isRequired,
   getLanguages: PropTypes.func.isRequired,
   resetErrors: PropTypes.func.isRequired,
+  closeAddMovieModal: PropTypes.func.isRequired,
 };
 
 AddMovie.defaultProps = {
   messages: {},
+  isModalOpen: false,
 };
 
 function mapStateToProps(state) {
@@ -136,4 +148,5 @@ export default connect(mapStateToProps, {
   addMovie,
   getLanguages,
   resetErrors,
+  closeAddMovieModal,
 })(AddMovie);
